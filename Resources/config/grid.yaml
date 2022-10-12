@@ -1,0 +1,58 @@
+sylius_grid:
+    grids: 
+        app_admin_etl_execution:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: App\Entity\Etl\EtlExecution
+                    repository:
+                        method: createAdminGridQueryBuilder
+            fields:
+                id:
+                    type: string
+                    label: "ID"
+                name:
+                    type: twig
+                    label: app.ui.etl_execution.name
+                    options:
+                        template: "admin/fields/etl_execution/etl_names.html.twig"
+                startTime:
+                    type: datetime
+                    label: app.ui.etl_execution.startTime
+                endTime:
+                    type: datetime
+                    label: app.ui.etl_execution.endTime
+                status:
+                    label: app.ui.etl_execution.status
+                    type: twig
+                    options:
+                        template: "admin/fields/etl_execution/etl_status.html.twig"
+            
+            filters:
+                name:
+                    type: select
+                    label: app.ui.etl_execution.name
+                    form_options:
+                        choices:
+                            "app.ui.etl_execution.names.export_subscription": "export_subscription"
+                status:
+                    type: select
+                    label: app.ui.etl_execution.status
+                    form_options:
+                        choices:
+                            "app.ui.etl_execution.statuses.success": "success"
+                            "app.ui.etl_execution.statuses.running": "running"
+                            "app.ui.etl_execution.statuses.failure": "failure"
+                startTime:
+                    type: date
+                    label: app.ui.etl_execution.startTime
+                endTime:
+                    type: date
+                    label: app.ui.etl_execution.endTime
+            
+            actions:
+                item:
+                    show:
+                        type: show
+                        enabled: true
+                        label: ""

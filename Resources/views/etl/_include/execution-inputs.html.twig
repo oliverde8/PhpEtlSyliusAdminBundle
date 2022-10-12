@@ -1,0 +1,20 @@
+<h3>{{ 'app.ui.etl_execution.show.execution_inputs.title'|trans }}</h3>
+<div class="ui three column stackable grid">
+    <div class="column">
+        <div class="ui list very relaxed">
+            <div class="item">
+                <div class="header">{{ 'app.ui.etl_execution.show.execution_inputs.input_data'|trans }}</div>
+                <dt>{{ etl.inputData }}</dt>
+            </div>
+            <div class="item">
+                <div class="header">{{ 'app.ui.etl_execution.show.execution_inputs.input_options'|trans }}</div>
+                <dt>{{ etl.inputOptions }}</dt>
+            </div>
+            <div class="item">
+                <div class="header">{{ 'app.ui.etl_execution.show.execution_inputs.definition'|trans }}</div>
+                <dt>{{ etl.definition|nl2br }}</dt>
+            </div>
+        </div>
+    </div>
+</div>
+

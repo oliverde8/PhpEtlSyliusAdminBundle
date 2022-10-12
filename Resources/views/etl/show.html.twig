@@ -1,0 +1,35 @@
+{% extends '@SyliusAdmin/layout.html.twig' %}
+{% set superAdminAccess = is_granted('admin.view.all', 'App\\Entity\\Etl\\EtlExecution') %}
+
+{% block title %}{{ 'app.ui.etl_execution.execution_etl'|trans }} {{ parent() }}{% endblock %}
+
+{% block content %}
+    <div class="ui stackable two column grid">
+        <div class="column">
+            <h1 class="ui header">
+                <i class="circular pencil icon"></i>
+                <div class="content">
+                    {{ 'app.ui.etl_execution.execution_etl'|trans }}
+                    <div class="sub header">{{ 'app.ui.etl_execution.execution_etl'|trans }}</div>
+                </div>
+            </h1>
+        </div>
+        <div class="middle aligned column">
+        </div>
+    </div>
+
+    <div class="ui segment">
+        {% include 'etl/_include/details.html.twig' %}
+    </div>
+
+    {% if is_granted('admin.view.all', 'App\\Entity\\Etl\\EtlExecution') %}
+        <div class="ui segment">
+            {% include 'etl/_include/execution-inputs.html.twig' %}
+        </div>
+    {% endif %}
+
+    <div class="ui segment">
+        {% include 'etl/_include/execution-outputs.html.twig' %}
+    </div>
+
+{% endblock %}

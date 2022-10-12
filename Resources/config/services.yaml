@@ -1,0 +1,17 @@
+services:
+  # default configuration for services in *this* file
+    _defaults:
+        autowire: true
+        autoconfigure: true
+    
+    Oliverde8\PhpEtlSyliusAdminBundle\:
+        resource: '../../'
+    
+#    Oliverde8\PhpEtlSyliusAdminBundle\Controller\:
+#        resource: '../../Controller/*'
+#        tags: ['controller.service_arguments']
+
+    Oliverde8\PhpEtlSyliusAdminBundle\Controller\EtlController:
+        class: 'Oliverde8\PhpEtlSyliusAdminBundle\Controller\EtlController'
+        arguments:
+            $etlExecutionRepository: '@Oliverde8\PhpEtlSyliusAdminBundle\Repository\Etl\EtlExecutionRepository'

@@ -1,0 +1,16 @@
+{% if data == 'success' %}
+    <span class="ui green label test-label">
+            <i class="checkmark icon"></i>{{ "app.ui.etl_execution.statuses.success"|trans }}
+        </span>
+{% elseif data == 'failure' %}
+    <span class="ui red label test-label">
+        <i class="exclamation alternate icon"></i>{{ "app.ui.etl_execution.statuses.failure"|trans }}
+    </span>
+{% elseif data == "running" or data == "queued" %}
+    <span class="ui orange label test-label">
+        <i class="stopwatch icon"></i>{{ "app.ui.etl_execution.statuses.running"|trans }}
+    </span>
+{% else %}
+    <span></span>
+{% endif %}
+
