@@ -13,6 +13,12 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class EtlExecution extends BaseEtlExecution implements ResourceInterface
 {
+    const EXPORT_SUBSCRIPTION = 'export_subscription';
+
+    const NAMES = [
+        self::EXPORT_SUBSCRIPTION
+    ];
+
     public function __construct()
     {
         parent::__construct('', '', [], []);

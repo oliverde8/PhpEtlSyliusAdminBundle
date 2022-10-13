@@ -4,7 +4,7 @@ sylius_grid:
             driver:
                 name: doctrine/orm
                 options:
-                    class: App\Entity\Etl\EtlExecution
+                    class: Oliverde8\PhpEtlSyliusAdminBundle\Entity\Etl\EtlExecution
                     repository:
                         method: createAdminGridQueryBuilder
             fields:
@@ -15,7 +15,7 @@ sylius_grid:
                     type: twig
                     label: app.ui.etl_execution.name
                     options:
-                        template: "admin/fields/etl_execution/etl_names.html.twig"
+                        template: "@Oliverde8PhpEtlSyliusAdmin/etl/grid/fields/etl_names.html.twig"
                 startTime:
                     type: datetime
                     label: app.ui.etl_execution.startTime
@@ -26,7 +26,7 @@ sylius_grid:
                     label: app.ui.etl_execution.status
                     type: twig
                     options:
-                        template: "admin/fields/etl_execution/etl_status.html.twig"
+                        template: "@Oliverde8PhpEtlSyliusAdmin/etl/grid/fields/etl_status.html.twig"
             
             filters:
                 name:

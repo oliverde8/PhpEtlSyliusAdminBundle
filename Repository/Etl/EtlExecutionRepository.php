@@ -6,6 +6,7 @@ use App\Repository\SimpleSyliusRepository;
 use \Oliverde8\PhpEtlBundle\Repository\EtlExecutionRepository as BaseEtlExecutionRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
+use Oliverde8\PhpEtlSyliusAdminBundle\Entity\Etl\EtlExecution;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 class EtlExecutionRepository extends BaseEtlExecutionRepository implements RepositoryInterface
@@ -19,13 +20,10 @@ class EtlExecutionRepository extends BaseEtlExecutionRepository implements Repos
 
     public function createAdminGridQueryBuilder(): QueryBuilder
     {
-        $exportNames = [
-            'export_subscription'
-        ];
         $qb = $this->createQueryBuilder('ee');
         $qb
             ->andWhere("ee.name in (:name)")
-            ->setParameter('name', $exportNames)
+            ->setParameter('name', EtlExecution::NAMES)
             ->orderBy('ee.startTime', 'desc');
 
         return $qb;

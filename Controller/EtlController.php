@@ -47,7 +47,7 @@ class EtlController extends AbstractController
             }
         }
 
-        return $this->render('@Oliverde8PhpEtlSyliusAdmin/etl/show.html.twig', [
+        return $this->render('@Oliverde8PhpEtlSyliusAdmin/etl/show/show.html.twig', [
             'etl' => $etl,
             'urls' => $urls
         ]);
