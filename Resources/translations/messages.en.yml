@@ -1,4 +1,9 @@
 app:
     ui:
-        etl_executions: "ETL Executions"
+        etl_execution:
+            title: "ETL Executions"
+            name: "Nom"
+            startTime: "Début"
+            endTime: "Fin"
+            status: "Status"
         exports: Exports

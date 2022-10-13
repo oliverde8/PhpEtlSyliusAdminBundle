@@ -32,7 +32,7 @@ final class AdminMenuListener
 
         if ($exportsMenu = $menu->getChild('exports')) {
             $etlExecution = $this->menuFactory->createItem('etl_executions', ['route' => 'app_admin_etl_execution_index'])
-                ->setLabel($this->translator->trans('app.ui.etl_executions'))
+                ->setLabel($this->translator->trans('app.ui.etl_execution.title'))
                 ->setLabelAttribute('icon', 'file');
 
             $exportsMenu->addChild($etlExecution);
