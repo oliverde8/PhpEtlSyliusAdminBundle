@@ -12,3 +12,10 @@ services:
         arguments:
             $etlExecutionRepository: '@Oliverde8\PhpEtlSyliusAdminBundle\Repository\Etl\EtlExecutionRepository'
             $executionContextFactory: '@Oliverde8\PhpEtlBundle\Services\ExecutionContextFactory'
+            
+    # Sylius menu
+    Oliverde8\PhpEtlSyliusAdminBundle\Menu\AdminMenuListener:
+        arguments:
+            $menuFactory: '@knp_menu.factory'
+        tags:
+            - { name: kernel.event_listener, event: sylius.menu.admin.main, method: addAdminMenuItems }

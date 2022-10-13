@@ -1,0 +1,4 @@
+app:
+    ui:
+        etl_executions: "ETL Executions"
+        exports: Exports
