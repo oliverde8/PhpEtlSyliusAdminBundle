@@ -7,3 +7,6 @@ app:
             endTime: "Fin"
             status: "Status"
         exports: Exports
+        dashboard:
+            title: Dashboard
+            subtitle: Vue d'ensemble de vos exécutions d'export

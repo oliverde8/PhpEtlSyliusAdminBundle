@@ -31,11 +31,17 @@ final class AdminMenuListener
             ->setLabel($this->translator->trans('app.ui.exports'));
 
         if ($exportsMenu = $menu->getChild('exports')) {
-            $etlExecution = $this->menuFactory->createItem('etl_executions', ['route' => 'app_admin_etl_execution_index'])
+
+            $dashboardMenu = $this->menuFactory->createItem('etl_executions_dashboard', ['route' => 'app_admin_etl_execution_dashboard'])
+                ->setLabel($this->translator->trans('app.ui.dashboard.title'))
+                ->setLabelAttribute('icon', 'options');
+
+            $gridMenu = $this->menuFactory->createItem('etl_executions_grid', ['route' => 'app_admin_etl_execution_index'])
                 ->setLabel($this->translator->trans('app.ui.etl_execution.title'))
                 ->setLabelAttribute('icon', 'file');
 
-            $exportsMenu->addChild($etlExecution);
+            $exportsMenu->addChild($dashboardMenu);
+            $exportsMenu->addChild($gridMenu);
         }
     }
 }

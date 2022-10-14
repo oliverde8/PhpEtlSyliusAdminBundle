@@ -20,3 +20,12 @@ app_admin_etl_execution_show:
         _sylius:
             section: admin
             permission: true
+
+app_admin_etl_execution_dashboard:
+    path: admin/etl-execution-dashboard
+    methods: [ GET ]
+    defaults:
+        _controller: 'Oliverde8\PhpEtlSyliusAdminBundle\Controller\DashboardController::indexAction'
+        _sylius:
+            section: admin
+            permission: true
