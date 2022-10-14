@@ -11,233 +11,67 @@
         </div>
     </div>
 
-    {#
-    {% if is_granted('admin.view.dashboard') %}
-        <div class="ui grid loadable form">
-            <div class="sylius-filters">
-                <div class="sylius-filters__field" style="flex-grow: 0;">
-                    <div class="field">
-                        <div class="label">
-                            {{ "page.dashboard.clubs"|trans }}
-                        </div>
-                        <select name="subscription_club" id="subscription_club" class="ui dropdown" data-is-selected="{{ clubId }}">
-                            <option value="">{{ "page.dashboard.all"|trans }}</option>
-                            {% for club in clubs %}
-                                <option value="{{ club.id }}">{{ club.name }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                </div>
-            </div>
-        </div>
-    {% endif %}
-    #}
-
-    {#
     <div class="ui card" style="width: 100%">
         <div class="content">
             <div class="ui center aligned grid">
-                <div class="five column row">
+                <div class="three column row">
                     <div class="column">
                         <div class="ui statistic">
                             <div class="label">
-                                {{ "page.dashboard.subscriptions.total"|trans }}
+                                {{ "app.ui.dashboard.total_etl"|trans }}
                             </div>
                             <div class="value">
-                                {{ total }}
+                                {{ totalEtl }}
                             </div>
                         </div>
                     </div>
                     <div class="column" >
                         <div class="ui statistic">
                             <div class="label">
-                                {{ "page.dashboard.subscriptions.total_men"|trans }}
+                                {{ "app.ui.dashboard.total_success_execution"|trans }}
                             </div>
                             <div class="value">
-                                {{ total_bygender.m }}
+                                {{ totalEtlSuccess }}
                             </div>
                         </div>
                     </div>
                     <div class="column">
                         <div class="ui statistic">
                             <div class="label">
-                                {{ "page.dashboard.subscriptions.total_women"|trans }}
+                                {{ "app.ui.dashboard.total_failure_execution"|trans }}
                             </div>
                             <div class="value">
-                                {{ total_bygender.f }}
+                                {{ totalEtlFailure }}
                             </div>
                         </div>
                     </div>
+                </div>
 
+                <div class="two column row">
                     <div class="column">
                         <div class="ui statistic">
                             <div class="label">
-                                {{ "page.dashboard.subscriptions.total_blocked"|trans }}
+                                {{ "app.ui.dashboard.total_waiting_execution"|trans }}
                             </div>
                             <div class="value">
-                                {{ total_blocked }}
+                                {{ totalEtlWaiting }}
                             </div>
                         </div>
                     </div>
                     <div class="column">
                         <div class="ui statistic">
                             <div class="label">
-                                {{ "page.dashboard.subscriptions.total_litigation"|trans }}
+                                {{ "app.ui.dashboard.middle_success_execution_run_time"|trans }}
                             </div>
                             <div class="value">
-                                {{ total_litigation }}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="column" style="margin-top: 42px;">
-                        <div class="ui statistic">
-                            <div class="label">
-                                {{ "page.dashboard.subscriptions.total_obligation_no"|trans }}
-                            </div>
-                            <div class="value">
-                                {{ total_byobligation.no }}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="column" style="margin-top: 42px;">
-                        <div class="ui statistic">
-                            <div class="label">
-                                {{ "page.dashboard.subscriptions.total_obligation_yes"|trans }}
-                            </div>
-                            <div class="value">
-                                {{ total_byobligation.yes }}
+                                {{ middleSuccessRunTime }}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div> #}
+    </div>
 
-    {#
-    <div class="ui grid">
-        <div class="column">
-            <div class="stats">
-                <div class="ui top attached action header">
-                    {{ "page.dashboard.subscriptions.period_title"|trans }}
-
-                    <div class="ui buttons">
-                        <a href="{{ url('sylius_admin_dashboard', {"endDate": endDate, "interval": "hour", "period": "P1D", "club": clubId}) }}"
-                           class="ui basic button {{ period == "P1D" ? "active" : "" }}">
-                            {{ "page.dashboard.subscriptions.period_1d"|trans }}
-                        </a>
-                        <a href="{{ url('sylius_admin_dashboard', {"endDate": endDate, "interval": "day", "period": "P7D", "club": clubId}) }}"
-                           class="ui basic button {{ period == "P7D" ? "active" : "" }}">
-                            {{ "page.dashboard.subscriptions.period_1w"|trans }}
-                        </a>
-                        <a href="{{ url('sylius_admin_dashboard', {"endDate": endDate, "interval": "day", "period": "P1M", "club": clubId}) }}"
-                           class="ui basic button {{ period == "P1M" ? "active" : "" }}">
-                            {{ "page.dashboard.subscriptions.period_1m"|trans }}
-                        </a>
-                        <a href="{{ url('sylius_admin_dashboard', {"endDate": endDate, "interval": "day", "period": "P3M", "club": clubId}) }}"
-                           class="ui basic button {{ period == "P3M" ? "active" : "" }}">
-                            {{ "page.dashboard.subscriptions.period_3m"|trans }}
-                        </a>
-                        <a href="{{ url('sylius_admin_dashboard', {"endDate": endDate, "interval": "month", "period": "P12M", "club": clubId}) }}"
-                           class="ui basic button {{ period == "P12M" ? "active" : "" }}">
-                            {{ "page.dashboard.subscriptions.period_1y"|trans }}
-                        </a>
-                    </div>
-                </div>
-
-                <div class="ui attached segment spaceless">
-                    <div class="stats-grid">
-                        <div class="stats-column">
-                            <div class="ui tiny statistic">
-                                <div class="value" style="padding-bottom: 10px;">
-                                    {{ period_new }}
-                                </div>
-                                <div class="label">
-                                    {{ 'page.dashboard.subscriptions.period_new'|trans }}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="stats-column">
-                            <div class="ui tiny statistic">
-                                <div class="value" style="padding-bottom: 10px;">
-                                    {{ period_disabled }}
-                                </div>
-                                <div class="label">
-                                    {{ 'page.dashboard.subscriptions.period_disabled'|trans }}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="stats-column">
-                            <div class="ui tiny statistic">
-                                <div class="value" style="padding-bottom: 10px;">
-                                    {{ period_litigation }}
-                                </div>
-                                <div class="label">
-                                    {{ 'page.dashboard.subscriptions.period_litigation'|trans }}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="ui bottom attached segment stats-graph">
-                    <a id="navigation-prev"
-                       class="navigation navigation-prev"
-                       style="display: none"
-                       data-stats-url="{{ url('sylius_admin_dashboard_statistics') }}">
-                        <i class="angle left icon"></i>
-                    </a>
-                    <a id="navigation-next"
-                       class="navigation navigation-next"
-                       style="display: none"
-                       data-stats-url="{{ url('sylius_admin_dashboard_statistics') }}">
-                        <i class="angle right icon"></i>
-                    </a>
-
-                    <a class="navigation navigation-prev"
-                       href="{{ url('sylius_admin_dashboard', {"endDate": startDate, "interval": interval, "period": period, "club": clubId}) }}">
-                        <i class="angle left icon"></i>
-                    </a>
-                    <canvas
-                        id="stats-graph"
-                        data-labels="{{ stats.labels|json_encode }}"
-                        data-values="{{ stats.values|json_encode }}"
-                        data-currency="">
-                    </canvas>
-                    {% if nextDate %}
-                        <a class="navigation navigation-next"
-                           href="{{ url('sylius_admin_dashboard', {"endDate": nextDate, "interval": interval, "period": period, "club": clubId}) }}">
-                            <i class="angle right icon"></i>
-                        </a>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-    </div> #}
-
-    <script>
-        {#window.addEventListener('DOMContentLoaded', function() {#}
-        {#    (function($) {#}
-
-        {#        let selectElt = $('#subscription_club')#}
-        {#        selectElt.val(selectElt[0].dataset.isSelected)#}
-
-        {#        let url = "{{ url('sylius_admin_dashboard', {"endDate": nextDate, "interval": interval, "period": period}) }}"#}
-        {#        selectElt.on('change', function(){#}
-        {#            let value = $(this).val()#}
-        {#            let club = '&amp;club=' + value#}
-        {#            url += club#}
-        {#            submitForm(url)#}
-        {#        });#}
-
-        {#        let submitForm = function(url) {#}
-        {#            let form = '<form action="' + url + '" method="post"></form>'#}
-        {#            let $form = $(form);#}
-        {#            $form.appendTo('body').hide().trigger('submit');#}
-        {#        }#}
-
-        {#    })(jQuery);#}
-        {#});#}
-    </script>
 {% endblock %}
 

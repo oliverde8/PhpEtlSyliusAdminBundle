@@ -15,7 +15,7 @@ class EtlExecution extends BaseEtlExecution implements ResourceInterface
 {
     const EXPORT_SUBSCRIPTION = 'export_subscription';
 
-    const NAMES = [
+    const EXPORT_NAMES = [
         self::EXPORT_SUBSCRIPTION
     ];
 

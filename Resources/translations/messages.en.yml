@@ -10,3 +10,8 @@ app:
         dashboard:
             title: Dashboard
             subtitle: Vue d'ensemble de vos exécutions d'export
+            total_etl: "Nombre total d'exécutions"
+            total_failure_execution: "Exécutions en échec"
+            total_success_execution: "Exécutions en succès"
+            total_waiting_execution: "Exécutions en attente"
+            middle_success_execution_run_time: "Temps moyen d'exécution des succès (secondes)"
