@@ -2,35 +2,29 @@
 
 namespace Oliverde8\PhpEtlSyliusAdminBundle\Controller;
 
-use Oliverde8\PhpEtlBundle\Entity\EtlExecution as BaseEtlExecution;
-use Oliverde8\PhpEtlSyliusAdminBundle\Services\DashboardService;
+use Oliverde8\PhpEtlSyliusAdminBundle\Repository\Etl\EtlExecutionStatRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 
 class DashboardController extends AbstractController
 {
-    private DashboardService $dashboardService;
+    private EtlExecutionStatRepository $etlExecutionStatRepository;
 
     public function __construct(
-        DashboardService $dashboardService
+        EtlExecutionStatRepository $etlExecutionStatRepository
     )
     {
-        $this->dashboardService = $dashboardService;
+        $this->etlExecutionStatRepository = $etlExecutionStatRepository;
     }
 
     public function indexAction(): Response
     {
-        $totalEtl = $this->dashboardService->getAllEtExecutions();
-        $totalEtlFailure = $this->dashboardService->getEtlExecutionByStatus([BaseEtlExecution::STATUS_FAILURE]);
-        $totalEtlSuccess = $this->dashboardService->getEtlExecutionByStatus([BaseEtlExecution::STATUS_SUCCESS]);
-        $totalEtlWaiting = $this->dashboardService->getEtlExecutionByStatus([BaseEtlExecution::STATUS_WAITING]);
-
         return $this->render('@Oliverde8PhpEtlSyliusAdmin/dashboard/index.html.twig', [
-            'totalEtl' => count($totalEtl),
-            'totalEtlFailure' => count($totalEtlFailure),
-            'totalEtlSuccess' => count($totalEtlSuccess),
-            'totalEtlWaiting' => count($totalEtlWaiting),
-            'middleSuccessRunTime' => $this->dashboardService->getMiddleRunTimeFromStatuses([BaseEtlExecution::STATUS_SUCCESS])
+            'totalEtl' => $this->etlExecutionStatRepository->getNbTotalEtl(),
+            'totalEtlFailure' => $this->etlExecutionStatRepository->getNbTotalEtlFailure(),
+            'totalEtlSuccess' => $this->etlExecutionStatRepository->getNbTotalEtlSuccess(),
+            'totalEtlWaiting' => $this->etlExecutionStatRepository->getNbTotalEtlWaiting(),
+            'middleSuccessRunTime' => $this->etlExecutionStatRepository->getMiddleSuccessRunTime()
         ]);
     }
 }
