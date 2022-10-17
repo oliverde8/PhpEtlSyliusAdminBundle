@@ -2,23 +2,64 @@
 
 namespace Oliverde8\PhpEtlSyliusAdminBundle\Controller;
 
+use Doctrine\ORM\EntityManagerInterface;
+use Oliverde8\PhpEtlBundle\Entity\EtlExecution;
+use Oliverde8\PhpEtlBundle\Message\EtlExecutionMessage;
 use Symfony\Component\HttpFoundation\Response;
 use Oliverde8\PhpEtlSyliusAdminBundle\Repository\Etl\EtlExecutionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Oliverde8\PhpEtlBundle\Services\ExecutionContextFactory;
+use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class EtlController extends AbstractController
 {
     private EtlExecutionRepository $etlExecutionRepository;
     private ExecutionContextFactory $executionContextFactory;
+    private EntityManagerInterface $em;
+    private MessageBusInterface $messageBus;
+    private TranslatorInterface $translator;
 
     public function __construct(
         EtlExecutionRepository $etlExecutionRepository,
-        ExecutionContextFactory $executionContextFactory
+        ExecutionContextFactory $executionContextFactory,
+        EntityManagerInterface $em,
+        MessageBusInterface $messageBus,
+        TranslatorInterface $translator
     )
     {
         $this->etlExecutionRepository = $etlExecutionRepository;
         $this->executionContextFactory = $executionContextFactory;
+        $this->em = $em;
+        $this->messageBus = $messageBus;
+        $this->translator = $translator;
+    }
+    /**
+     * @return Response
+     */
+    public function ExecuteAction(string $name, ?string $definition = null, ?array $inputData = null, ?array $inputOptions = null): Response
+    {
+        $execution = new EtlExecution(
+            $name,
+            $definition ?? '',
+            $inputData ?? [[]],
+            $inputOptions ?? []
+        );
+
+        $execution->setStatus($execution::STATUS_QUEUED);
+        $this->em->persist($execution);
+        $this->em->flush();
+
+        /** @var int $executionId */
+        $executionId = $execution->getId();
+        $this->messageBus->dispatch(new EtlExecutionMessage($executionId));
+
+        $this->addFlash(
+            'success',
+            $this->translator->trans('app.ui.flash.success')
+        );
+
+        return $this->redirectToRoute("app_admin_etl_execution_index");
     }
 
     /**

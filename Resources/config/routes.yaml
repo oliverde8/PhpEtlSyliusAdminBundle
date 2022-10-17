@@ -29,3 +29,12 @@ app_admin_etl_execution_dashboard:
         _sylius:
             section: admin
             permission: true
+    
+app_admin_etl_execution_execute:
+    path: admin/etl-execution-execute/{name}/{definition?}/{inputData?}/{inputOptions?}
+    methods: [ GET ]
+    defaults:
+        _controller: 'Oliverde8\PhpEtlSyliusAdminBundle\Controller\EtlController::ExecuteAction'
+        _sylius:
+            section: admin
+            permission: true
