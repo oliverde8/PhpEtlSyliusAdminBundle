@@ -22,8 +22,6 @@ class EtlExecutionRepository extends BaseEtlExecutionRepository implements Repos
     {
         $qb = $this->createQueryBuilder('ee');
         $qb
-            ->andWhere("ee.name in (:name)")
-            ->setParameter('name', EtlExecution::EXPORT_NAMES)
             ->orderBy('ee.startTime', 'desc');
 
         return $qb;
