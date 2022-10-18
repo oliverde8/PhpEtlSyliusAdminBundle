@@ -1,4 +1,7 @@
 sylius_grid:
+    templates:
+        filter:
+            etl_execution_name: "@SyliusUi/Grid/Filter/select.html.twig"
     grids: 
         app_admin_etl_execution:
             driver:
@@ -30,11 +33,8 @@ sylius_grid:
             
             filters:
                 name:
-                    type: select
+                    type: etl_execution_name
                     label: app.ui.etl_execution.name
-                    form_options:
-                        choices:
-                            "app.ui.etl_execution.names.export_subscription": "export_subscription"
                 status:
                     type: select
                     label: app.ui.etl_execution.status

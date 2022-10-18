@@ -6,6 +6,7 @@ app:
             startTime: "Début"
             endTime: "Fin"
             status: "Status"
+            all: "Tous"
         exports: Exports
         dashboard:
             title: Dashboard

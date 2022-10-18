@@ -19,3 +19,10 @@ services:
             $menuFactory: '@knp_menu.factory'
         tags:
             - { name: kernel.event_listener, event: sylius.menu.admin.main, method: addAdminMenuItems }
+
+    Oliverde8\PhpEtlSyliusAdminBundle\Grid\Filter\EtlExecutionNameFilter:
+        class: 'Oliverde8\PhpEtlSyliusAdminBundle\Grid\Filter\EtlExecutionNameFilter'
+        tags:
+            -   name: sylius.grid_filter
+                type: etl_execution_name
+                form_type: 'Oliverde8\PhpEtlSyliusAdminBundle\Form\Type\Filter\EtlExecutionNameFilterType'

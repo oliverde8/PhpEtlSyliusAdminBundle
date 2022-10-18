@@ -18,6 +18,16 @@ class EtlExecutionRepository extends BaseEtlExecutionRepository implements Repos
         parent::__construct($registry);
     }
 
+    public function getEtlExecutionNames(): array
+    {
+        $qb = $this->createQueryBuilder('ee');
+        $qb
+            ->select('ee.name')
+            ->groupBy('ee.name');
+
+        return $qb->getQuery()->getResult();
+    }
+
     public function createAdminGridQueryBuilder(): QueryBuilder
     {
         $qb = $this->createQueryBuilder('ee');
