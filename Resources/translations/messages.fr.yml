@@ -14,6 +14,6 @@ app:
             total_failure_execution: "Exécutions en échec"
             total_success_execution: "Exécutions en succès"
             total_waiting_execution: "Exécutions en attente"
-            middle_success_execution_run_time: "Temps moyen d'exécution des succès (secondes)"
+            average_success_execution_run_time: "Temps moyen d'exécution des succès (secondes)"
         flash:
             success: "L'export est en cours. Veuillez rafraîchir la page s'il n'apparaît pas dans la liste."

@@ -2,19 +2,19 @@ app:
     ui:
         etl_execution:
             title: "ETL Executions"
-            name: "Nom"
-            startTime: "Début"
-            endTime: "Fin"
+            name: "Name"
+            startTime: "Start"
+            endTime: "End"
             status: "Status"
-            all: "Tous"
+            all: "All"
         exports: Exports
         dashboard:
             title: Dashboard
-            subtitle: Vue d'ensemble de vos exécutions d'export
-            total_etl: "Nombre total d'exécutions"
-            total_failure_execution: "Exécutions en échec"
-            total_success_execution: "Exécutions en succès"
-            total_waiting_execution: "Exécutions en attente"
-            middle_success_execution_run_time: "Temps moyen d'exécution des succès (secondes)"
+            subtitle: Overview of your export executions
+            total_etl: "Total number of executions"
+            total_failure_execution: "Total failed executions"
+            total_success_execution: "Total success executions"
+            total_waiting_execution: "Total waiting executions"
+            average_success_execution_run_time: "Average success execution run time (seconds)"
         flash:
-            success: "L'export est en cours. Veuillez rafraîchir la page s'il n'apparaît pas dans la liste."
+            success: "Export is in progress. Please, reload page if it is not in the list."
