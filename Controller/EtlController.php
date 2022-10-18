@@ -5,10 +5,12 @@ namespace Oliverde8\PhpEtlSyliusAdminBundle\Controller;
 use Doctrine\ORM\EntityManagerInterface;
 use Oliverde8\PhpEtlBundle\Entity\EtlExecution;
 use Oliverde8\PhpEtlBundle\Message\EtlExecutionMessage;
+use Symfony\Component\HttpFoundation\HeaderUtils;
 use Symfony\Component\HttpFoundation\Response;
 use Oliverde8\PhpEtlSyliusAdminBundle\Repository\Etl\EtlExecutionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Oliverde8\PhpEtlBundle\Services\ExecutionContextFactory;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -90,5 +92,47 @@ class EtlController extends AbstractController
             'etl' => $etl,
             'urls' => $urls
         ]);
+    }
+
+    /**
+     * @param EtlExecution $etlExecution
+     * @param string $filename
+     * @return Response
+     */
+    public function downloadAction(EtlExecution $etlExecution, string $filename): Response
+    {
+        $context = $this->executionContextFactory->get(['etl' => ['execution' => $etlExecution]]);
+
+        foreach ($context->getFileSystem()->listContents("/") as $file) {
+            $pathInfo = pathinfo($file);
+            if ($pathInfo['filename'] == $filename) {
+
+                $response = new StreamedResponse(function () use ($context, $file) {
+                    $outputStream = fopen('php://output', 'wb');
+                    $fileStream = $context->getFileSystem()->readStream($file);
+                    if ($outputStream && $fileStream) {
+                        stream_copy_to_stream($fileStream, $outputStream);
+                    }
+                });
+
+                $disposition = HeaderUtils::makeDisposition(
+                    HeaderUtils::DISPOSITION_ATTACHMENT,
+                    "execution_{$etlExecution->getId()}_" . basename($file)
+                );
+                $response->headers->set('Content-Disposition', $disposition);
+
+                return $response;
+            }
+        }
+
+        $this->addFlash(
+            'error',
+            $this->translator->trans("app.ui.etl_execution.flash.download_error")
+        );
+
+        return $this->redirectToRoute(
+            "app_admin_etl_execution_show",
+            ['id' => $etlExecution->getId()]
+        );
     }
 }

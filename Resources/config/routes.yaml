@@ -39,3 +39,13 @@ app_admin_etl_execution_execute:
         _sylius:
             section: admin
             permission: true
+            
+app_admin_etl_execution_download:
+    path: admin/etl-executions-download/{id}/{filename}
+    methods: [ GET ]
+    defaults:
+        _controller: 'Oliverde8\PhpEtlSyliusAdminBundle\Controller\EtlController::downloadAction'
+        _sylius:
+            section: admin
+            permission: true
+    

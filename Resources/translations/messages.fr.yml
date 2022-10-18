@@ -46,3 +46,4 @@ app:
                 average_success_execution_run_time: "Temps moyen d'exécution des succès (secondes)"
             flash:
                 success: "L'exécution est en cours. Veuillez rafraîchir la page s'il n'apparaît pas dans la liste."
+                download_error: "Une erreur s'est produite lors de l'exécution du processus."
