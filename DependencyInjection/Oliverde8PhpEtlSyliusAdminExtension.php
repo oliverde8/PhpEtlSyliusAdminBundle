@@ -16,16 +16,5 @@ class Oliverde8PhpEtlSyliusAdminExtension extends Extension
     {
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config/'));
         $loader->load('services.yaml');
-
-        $configuration = new Configuration();
-        $config = $this->processConfiguration($configuration, $configs);
-        foreach ($config as $key => $value) {
-            $container->setParameter($this->getAlias() . $key, $value);
-        }
-    }
-
-    public function getAlias(): string
-    {
-        return 'php_etl_sylius_admin';
     }
 }
