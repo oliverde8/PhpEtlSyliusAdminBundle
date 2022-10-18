@@ -7,14 +7,14 @@ app:
             endTime: "End"
             status: "Status"
             all: "All"
-        exports: Exports
+        execution: Execution
         dashboard:
             title: Dashboard
-            subtitle: Overview of your export executions
+            subtitle: Overview of process executions
             total_etl: "Total number of executions"
             total_failure_execution: "Total failed executions"
             total_success_execution: "Total success executions"
             total_waiting_execution: "Total waiting executions"
             average_success_execution_run_time: "Average success execution run time (seconds)"
         flash:
-            success: "Export is in progress. Please, reload page if it is not in the list."
+            success: "Execution is in progress. Please, reload page if it is not in the list."

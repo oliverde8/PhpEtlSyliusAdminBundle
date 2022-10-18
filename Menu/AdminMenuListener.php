@@ -27,10 +27,10 @@ final class AdminMenuListener
     {
         $menu = $event->getMenu();
         $menu
-            ->addChild('exports')
-            ->setLabel($this->translator->trans('app.ui.exports'));
+            ->addChild('execution')
+            ->setLabel($this->translator->trans('app.ui.execution'));
 
-        if ($exportsMenu = $menu->getChild('exports')) {
+        if ($executionsMenu = $menu->getChild('execution')) {
 
             $dashboardMenu = $this->menuFactory->createItem('etl_executions_dashboard', ['route' => 'app_admin_etl_execution_dashboard'])
                 ->setLabel($this->translator->trans('app.ui.dashboard.title'))
@@ -40,8 +40,8 @@ final class AdminMenuListener
                 ->setLabel($this->translator->trans('app.ui.etl_execution.title'))
                 ->setLabelAttribute('icon', 'file');
 
-            $exportsMenu->addChild($dashboardMenu);
-            $exportsMenu->addChild($gridMenu);
+            $executionsMenu->addChild($dashboardMenu);
+            $executionsMenu->addChild($gridMenu);
         }
     }
 }
