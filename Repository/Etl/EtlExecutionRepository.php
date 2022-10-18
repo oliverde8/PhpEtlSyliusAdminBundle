@@ -6,7 +6,6 @@ use App\Repository\SimpleSyliusRepository;
 use \Oliverde8\PhpEtlBundle\Repository\EtlExecutionRepository as BaseEtlExecutionRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
-use Oliverde8\PhpEtlSyliusAdminBundle\Entity\Etl\EtlExecution;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 class EtlExecutionRepository extends BaseEtlExecutionRepository implements RepositoryInterface
