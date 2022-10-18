@@ -1,32 +1,19 @@
-{% if superAdminAccess %}
-    <h3>{{ 'app.ui.etl_execution.show.execution_outputs.title'|trans }}</h3>
-{% else %}
-    <h3>{{ 'app.ui.etl_execution.show.execution_outputs.files'|trans }}</h3>
-{% endif %}
+<h3>{{ 'app.ui.etl_execution.show.execution_outputs.title'|trans }}</h3>
 <div class="ui column stackable grid">
     <div class="column">
         <div class="ui list very relaxed">
             <div class="item">
-                {% if superAdminAccess %}
-                    <div class="header">{{ 'app.ui.etl_execution.show.execution_outputs.files'|trans }}</div>
-                {% endif %}
+                <div class="header">{{ 'app.ui.etl_execution.show.execution_outputs.files'|trans }}</div>
                 {% for url in urls %}
-                    {% if superAdminAccess == false and url.filetype == 'log' %}
-                        <span></span>
-                    {% else %}
-                        <dt>
-                            <a href="{{ path('app_admin_etl_execution_report_download', { id: url.id, filename: url.filename }) }}">{{ ('app.ui.etl_execution.show.execution_outputs.download.' ~ url.filetype)|trans }}</a>
-                        </dt>
-                    {% endif %}
-
+                    <dt>
+                        <a href="{{ path('app_admin_etl_execution_report_download', { id: url.id, filename: url.filename }) }}">{{ ('app.ui.etl_execution.show.execution_outputs.download.' ~ url.filetype)|trans }}</a>
+                    </dt>
                 {% endfor %}
             </div>
-            {% if superAdminAccess %}
-                <div class="item">
-                    <div class="header">{{ 'app.ui.etl_execution.show.execution_outputs.error_message'|trans }}</div>
-                    <dt>{{ etl.errorMessage|nl2br }}</dt>
-                </div>
-            {% endif %}
+            <div class="item">
+                <div class="header">{{ 'app.ui.etl_execution.show.execution_outputs.error_message'|trans }}</div>
+                <dt>{{ etl.errorMessage|nl2br }}</dt>
+            </div>
         </div>
     </div>
 </div>

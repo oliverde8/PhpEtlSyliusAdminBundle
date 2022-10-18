@@ -26,7 +26,7 @@ class EtlExecutionNameFilterType extends AbstractType
             'choice_loader' => new CallbackChoiceLoader(function () {
                 $names = $this->etlExecutionRepository->getEtlExecutionNames();
 
-                $choices = ["app.ui.etl_execution.all" => "all"];
+                $choices = ["app.ui.etl_execution.grid.all" => "all"];
                 foreach ($names as $name) {
                     $choices[$name['name']] = $name['name'];
                 }
@@ -35,15 +35,5 @@ class EtlExecutionNameFilterType extends AbstractType
             }),
             'label' => false,
         ]);
-    }
-
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver
-            ->setDefaults([
-                'range' => [0, 10],
-            ])
-            ->setAllowedTypes('range', ['array'])
-        ;
     }
 }

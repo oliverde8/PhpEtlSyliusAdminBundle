@@ -1,7 +1,6 @@
 {% extends '@SyliusAdmin/layout.html.twig' %}
-{% set superAdminAccess = is_granted('admin.view.all', 'App\\Entity\\Etl\\EtlExecution') %}
 
-{% block title %}{{ 'app.ui.etl_execution.execution_etl'|trans }} {{ parent() }}{% endblock %}
+{% block title %}{{ 'app.ui.etl_execution.show.title'|trans }} {{ parent() }}{% endblock %}
 
 {% block content %}
     <div class="ui stackable two column grid">
@@ -9,8 +8,8 @@
             <h1 class="ui header">
                 <i class="circular pencil icon"></i>
                 <div class="content">
-                    {{ 'app.ui.etl_execution.execution_etl'|trans }}
-                    <div class="sub header">{{ 'app.ui.etl_execution.execution_etl'|trans }}</div>
+                    {{ 'app.ui.etl_execution.show.title'|trans }}
+                    <div class="sub header">{{ 'app.ui.etl_execution.show.title'|trans }}</div>
                 </div>
             </h1>
         </div>
@@ -19,17 +18,15 @@
     </div>
 
     <div class="ui segment">
-        {% include 'etl/_include/details.html.twig' %}
+        {% include '@Oliverde8PhpEtlSyliusAdmin/etl/show/_include/details.html.twig' %}
     </div>
 
-    {% if is_granted('admin.view.all', 'App\\Entity\\Etl\\EtlExecution') %}
-        <div class="ui segment">
-            {% include 'etl/_include/execution-inputs.html.twig' %}
-        </div>
-    {% endif %}
+    <div class="ui segment">
+        {% include '@Oliverde8PhpEtlSyliusAdmin/etl/show/_include/execution-inputs.html.twig' %}
+    </div>
 
     <div class="ui segment">
-        {% include 'etl/_include/execution-outputs.html.twig' %}
+        {% include '@Oliverde8PhpEtlSyliusAdmin/etl/show/_include/execution-outputs.html.twig' %}
     </div>
 
 {% endblock %}

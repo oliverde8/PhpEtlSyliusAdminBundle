@@ -1,13 +1,41 @@
 app:
     ui:
+        etl_executions: ETL Executions
         etl_execution:
-            title: "ETL Executions"
-            name: "Name"
-            startTime: "Start"
-            endTime: "End"
-            status: "Status"
-            all: "All"
-        execution: Execution
+            grid:
+                title: "ETL Executions"
+                name: "Name"
+                startTime: "Start"
+                endTime: "End"
+                status: "Status"
+                all: "All"
+            show:
+                title: ETL Execution
+                details:
+                    title: "Details"
+                    name: "Name"
+                    status: "Status"
+                    created_time: "Creation date"
+                    start_time: "Start date"
+                    end_time: "End date"
+                    fail_time: "Error date"
+                execution_inputs:
+                    title: "Execution inputs"
+                    input_data: "Input data"
+                    input_options: "Input options"
+                    definition: "Definition"
+                execution_outputs:
+                    title: "Execution output"
+                    files: "Files"
+                    error_message: "Error message"
+                    logs: "Logs"
+                    download:
+                        log: "Download log file"
+                        result: "Download result file"
+            statuses:
+                success: "success"
+                failure: "Failed"
+                running: "Running"
         dashboard:
             title: Dashboard
             subtitle: Overview of process executions

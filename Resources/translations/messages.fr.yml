@@ -1,19 +1,48 @@
 app:
     ui:
+        etl_executions: ETL Executions
         etl_execution:
-            title: "ETL Executions"
-            name: "Nom"
-            startTime: "Début"
-            endTime: "Fin"
-            status: "Status"
-        execution: Exécution
-        dashboard:
-            title: Dashboard
-            subtitle: Vue d'ensemble des processus d'exécution
-            total_etl: "Nombre total d'exécutions"
-            total_failure_execution: "Exécutions en échec"
-            total_success_execution: "Exécutions en succès"
-            total_waiting_execution: "Exécutions en attente"
-            average_success_execution_run_time: "Temps moyen d'exécution des succès (secondes)"
-        flash:
-            success: "L'exécution est en cours. Veuillez rafraîchir la page s'il n'apparaît pas dans la liste."
+            grid:
+                title: ETL Executions
+                name: "Nom"
+                startTime: "Début"
+                endTime: "Fin"
+                status: "Status"
+                all: "Tous"
+            show:
+                title: ETL Execution
+                details:
+                    title: "Détails"
+                    name: "Nom"
+                    status: "Statut"
+                    created_time: "Date de création"
+                    start_time: "Date de début"
+                    end_time: "Date de fin"
+                    fail_time: "Date d'erreur"
+                execution_inputs:
+                    title: "Entrées d'exécution"
+                    input_data: "Données d'entrée"
+                    input_options: "Options d'entrée"
+                    definition: "Définition"
+                execution_outputs:
+                    title: "Sorties d'exécution"
+                    files: "Fichiers"
+                    error_message: "Message d'erreur"
+                    logs: "Logs"
+                    download:
+                        log: "Télécharger le fichier de log"
+                        result: "Télécharger le fichier de résultat"
+            statuses:
+                success: "succès"
+                failure: "Echec"
+                running: "En cours"
+            dashboard:
+                title: Dashboard
+                subtitle: Vue d'ensemble des processus d'exécution
+                total_etl: "Nombre total d'exécutions"
+                total_failure_execution: "Exécutions en échec"
+                total_success_execution: "Exécutions en succès"
+                total_waiting_execution: "Exécutions en attente"
+                average_success_execution_run_time: "Temps moyen d'exécution des succès (secondes)"
+            flash:
+                success: "L'exécution est en cours. Veuillez rafraîchir la page s'il n'apparaît pas dans la liste."

@@ -15,18 +15,16 @@ sylius_grid:
                     type: string
                     label: "ID"
                 name:
-                    type: twig
-                    label: app.ui.etl_execution.name
-                    options:
-                        template: "@Oliverde8PhpEtlSyliusAdmin/etl/grid/fields/etl_names.html.twig"
+                    type: string
+                    label: app.ui.etl_execution.grid.name
                 startTime:
                     type: datetime
-                    label: app.ui.etl_execution.startTime
+                    label: app.ui.etl_execution.grid.startTime
                 endTime:
                     type: datetime
-                    label: app.ui.etl_execution.endTime
+                    label: app.ui.etl_execution.grid.endTime
                 status:
-                    label: app.ui.etl_execution.status
+                    label: app.ui.etl_execution.grid.status
                     type: twig
                     options:
                         template: "@Oliverde8PhpEtlSyliusAdmin/etl/grid/fields/etl_status.html.twig"
@@ -34,10 +32,10 @@ sylius_grid:
             filters:
                 name:
                     type: etl_execution_name
-                    label: app.ui.etl_execution.name
+                    label: app.ui.etl_execution.grid.name
                 status:
                     type: select
-                    label: app.ui.etl_execution.status
+                    label: app.ui.etl_execution.grid.status
                     form_options:
                         choices:
                             "app.ui.etl_execution.statuses.success": "success"
@@ -45,10 +43,10 @@ sylius_grid:
                             "app.ui.etl_execution.statuses.failure": "failure"
                 startTime:
                     type: date
-                    label: app.ui.etl_execution.startTime
+                    label: app.ui.etl_execution.grid.startTime
                 endTime:
                     type: date
-                    label: app.ui.etl_execution.endTime
+                    label: app.ui.etl_execution.grid.endTime
             
             actions:
                 item:

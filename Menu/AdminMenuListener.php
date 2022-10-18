@@ -28,7 +28,7 @@ final class AdminMenuListener
         $menu = $event->getMenu();
         $menu
             ->addChild('execution')
-            ->setLabel($this->translator->trans('app.ui.execution'));
+            ->setLabel($this->translator->trans('app.ui.etl_executions'));
 
         if ($executionsMenu = $menu->getChild('execution')) {
 
@@ -37,7 +37,7 @@ final class AdminMenuListener
                 ->setLabelAttribute('icon', 'options');
 
             $gridMenu = $this->menuFactory->createItem('etl_executions_grid', ['route' => 'app_admin_etl_execution_index'])
-                ->setLabel($this->translator->trans('app.ui.etl_execution.title'))
+                ->setLabel($this->translator->trans('app.ui.etl_executions'))
                 ->setLabelAttribute('icon', 'file');
 
             $executionsMenu->addChild($dashboardMenu);

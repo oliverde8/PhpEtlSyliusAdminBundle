@@ -1,16 +1,16 @@
 
-<h3>{{ 'app.ui.etl_execution.show.details.title'|trans }}</h3>
+<h3>{{ 'app.ui.etl_execution.show.title'|trans }}</h3>
 <div class="ui three column stackable grid">
     <div class="column">
         <div class="ui list very relaxed">
             <div class="item">
                 <div class="header">{{ 'app.ui.etl_execution.show.details.name'|trans }}</div>
-                <dt>{{ ('app.ui.etl_execution.names.' ~ etl.name)|trans }}</dt>
+                <dt>{{ etl.name }}</dt>
             </div>
             <div class="item">
                 <div class="header">{{ 'app.ui.etl_execution.show.details.status'|trans }}</div>
                 <dt>
-                    {% include 'etl/_include/status.html.twig' with {data: etl.status} %}
+                    {% include '@Oliverde8PhpEtlSyliusAdmin/etl/show/_include/status.html.twig' with {data: etl.status} %}
                 </dt>
             </div>
         </div>
