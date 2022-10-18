@@ -70,8 +70,6 @@ class EtlController extends AbstractController
     {
         $etl = $this->etlExecutionRepository->findOneBy(['id' => $id]);
 
-        $this->denyAccessUnlessGranted('admin.index', $etl);
-
         $urls = [];
         if (!is_null($etl)) {
             $context = $this->executionContextFactory->get(['etl' => ['execution' => $etl]]);
