@@ -59,6 +59,9 @@ sylius_grid:
                     label: app.ui.etl_execution.grid.createTime
             
             actions:
+                main:
+                    create:
+                        type: create
                 item:
                     show:
                         type: show
