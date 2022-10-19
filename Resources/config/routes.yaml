@@ -23,7 +23,7 @@ app_admin_etl_execution_dashboard:
             permission: true
     
 app_admin_etl_execution_execute:
-    path: admin/etl-executions/execute/{name}/{definition?}/{inputData?}/{inputOptions?}
+    path: admin/etl-executions/execute/{id}
     methods: [ GET ]
     defaults:
         _controller: 'Oliverde8\PhpEtlSyliusAdminBundle\Controller\EtlController::ExecuteAction'
