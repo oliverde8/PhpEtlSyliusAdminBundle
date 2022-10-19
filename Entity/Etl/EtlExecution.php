@@ -9,7 +9,6 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=EtlExecutionRepository::class)
- * @ORM\Table(name="Etl_execution")
  */
 class EtlExecution extends BaseEtlExecution implements ResourceInterface
 {
