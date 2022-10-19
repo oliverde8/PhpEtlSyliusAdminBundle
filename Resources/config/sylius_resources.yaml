@@ -4,3 +4,4 @@ sylius_resource:
             driver: doctrine/orm
             classes:
                 model: Oliverde8\PhpEtlSyliusAdminBundle\Entity\Etl\EtlExecution
+                form: Oliverde8\PhpEtlSyliusAdminBundle\Form\Type\Etl\EtlExecutionType

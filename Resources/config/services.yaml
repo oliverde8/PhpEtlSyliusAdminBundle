@@ -26,3 +26,4 @@ services:
             -   name: sylius.grid_filter
                 type: etl_execution_name
                 form_type: 'Oliverde8\PhpEtlSyliusAdminBundle\Form\Type\Filter\EtlExecutionNameFilterType'
+

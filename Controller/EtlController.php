@@ -3,7 +3,7 @@
 namespace Oliverde8\PhpEtlSyliusAdminBundle\Controller;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Oliverde8\PhpEtlBundle\Entity\EtlExecution;
+use Oliverde8\PhpEtlSyliusAdminBundle\Entity\Etl\EtlExecution;
 use Oliverde8\PhpEtlBundle\Message\EtlExecutionMessage;
 use Symfony\Component\HttpFoundation\HeaderUtils;
 use Symfony\Component\HttpFoundation\Response;
