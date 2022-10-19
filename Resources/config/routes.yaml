@@ -13,17 +13,8 @@ app_admin_etl_execution:
                 subheader: app.ui.etl_execution.grid.title
                 header: app.ui.etl_execution.grid.title
 
-app_admin_etl_execution_show:
-    path: admin/etl-executions/{id}
-    methods: [ GET ]
-    defaults:
-        _controller: 'Oliverde8\PhpEtlSyliusAdminBundle\Controller\EtlController::showAction'
-        _sylius:
-            section: admin
-            permission: true
-
 app_admin_etl_execution_dashboard:
-    path: admin/etl-execution-dashboard
+    path: admin/etl-executions/dashboard
     methods: [ GET ]
     defaults:
         _controller: 'Oliverde8\PhpEtlSyliusAdminBundle\Controller\DashboardController::indexAction'
@@ -32,7 +23,7 @@ app_admin_etl_execution_dashboard:
             permission: true
     
 app_admin_etl_execution_execute:
-    path: admin/etl-execution-execute/{name}/{definition?}/{inputData?}/{inputOptions?}
+    path: admin/etl-executions/execute/{name}/{definition?}/{inputData?}/{inputOptions?}
     methods: [ GET ]
     defaults:
         _controller: 'Oliverde8\PhpEtlSyliusAdminBundle\Controller\EtlController::ExecuteAction'
@@ -41,10 +32,19 @@ app_admin_etl_execution_execute:
             permission: true
             
 app_admin_etl_execution_download:
-    path: admin/etl-executions-download/{id}/{filename}
+    path: admin/etl-executions/download/{id}/{filename}
     methods: [ GET ]
     defaults:
         _controller: 'Oliverde8\PhpEtlSyliusAdminBundle\Controller\EtlController::downloadAction'
+        _sylius:
+            section: admin
+            permission: true
+            
+app_admin_etl_execution_show:
+    path: admin/etl-executions/{id}
+    methods: [ GET ]
+    defaults:
+        _controller: 'Oliverde8\PhpEtlSyliusAdminBundle\Controller\EtlController::showAction'
         _sylius:
             section: admin
             permission: true
