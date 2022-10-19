@@ -10,8 +10,8 @@
     <span class="ui grey label">
         <i class="stopwatch icon"></i>{{ "app.ui.etl_execution.statuses.waiting"|trans }}
     </span>
-{% else %}
+{% elseif data == "queued" %}
     <span class="ui orange label">
-        <i class="stopwatch icon"></i>{{ "app.ui.etl_execution.statuses.waiting"|trans }}
+        <i class="stopwatch icon"></i>{{ "app.ui.etl_execution.statuses.queued"|trans }}
     </span>
 {% endif %}

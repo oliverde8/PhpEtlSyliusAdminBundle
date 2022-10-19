@@ -47,6 +47,7 @@ sylius_grid:
                             "app.ui.etl_execution.statuses.running": "running"
                             "app.ui.etl_execution.statuses.failure": "failure"
                             "app.ui.etl_execution.statuses.waiting": "waiting"
+                            "app.ui.etl_execution.statuses.queued": "queued"
                 startTime:
                     type: date
                     label: app.ui.etl_execution.grid.startTime

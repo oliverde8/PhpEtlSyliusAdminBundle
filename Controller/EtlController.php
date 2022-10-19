@@ -3,8 +3,9 @@
 namespace Oliverde8\PhpEtlSyliusAdminBundle\Controller;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Oliverde8\PhpEtlSyliusAdminBundle\Entity\Etl\EtlExecution;
+use Oliverde8\PhpEtlBundle\Entity\EtlExecution;
 use Oliverde8\PhpEtlBundle\Message\EtlExecutionMessage;
+use Oliverde8\PhpEtlSyliusAdminBundle\Exception\EtlExecutionException;
 use Symfony\Component\HttpFoundation\HeaderUtils;
 use Symfony\Component\HttpFoundation\Response;
 use Oliverde8\PhpEtlSyliusAdminBundle\Repository\Etl\EtlExecutionRepository;
@@ -39,21 +40,18 @@ class EtlController extends AbstractController
     /**
      * @return Response
      */
-    public function ExecuteAction(string $name, ?string $definition = null, ?array $inputData = null, ?array $inputOptions = null): Response
+    public function ExecuteAction(EtlExecution $etlExecution): Response
     {
-        $execution = new EtlExecution(
-            $name,
-            $definition ?? '',
-            $inputData ?? [[]],
-            $inputOptions ?? []
-        );
+        if ($etlExecution->getStatus() != EtlExecution::STATUS_WAITING) {
+            throw new EtlExecutionException("Etl execution has already been run %s.", $etlExecution);
+        }
 
-        $execution->setStatus($execution::STATUS_QUEUED);
-        $this->em->persist($execution);
+        $etlExecution->setStatus($etlExecution::STATUS_QUEUED);
+        $this->em->persist($etlExecution);
         $this->em->flush();
 
         /** @var int $executionId */
-        $executionId = $execution->getId();
+        $executionId = $etlExecution->getId();
         $this->messageBus->dispatch(new EtlExecutionMessage($executionId));
 
         $this->addFlash(

@@ -39,6 +39,7 @@ app:
                 failure: "Failed"
                 running: "Running"
                 waiting: "Waiting"
+                queued: "Queued"
         dashboard:
             title: Dashboard
             subtitle: Overview of process executions
