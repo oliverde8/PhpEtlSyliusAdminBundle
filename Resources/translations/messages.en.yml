@@ -5,6 +5,7 @@ app:
             grid:
                 title: "ETL Executions"
                 name: "Name"
+                createTime: "Create"
                 startTime: "Start"
                 endTime: "End"
                 status: "Status"
@@ -36,6 +37,7 @@ app:
                 success: "success"
                 failure: "Failed"
                 running: "Running"
+                waiting: "Waiting"
         dashboard:
             title: Dashboard
             subtitle: Overview of process executions

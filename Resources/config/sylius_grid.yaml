@@ -17,6 +17,9 @@ sylius_grid:
                 name:
                     type: string
                     label: app.ui.etl_execution.grid.name
+                createTime:
+                    type: datetime
+                    label: app.ui.etl_execution.grid.createTime
                 startTime:
                     type: datetime
                     label: app.ui.etl_execution.grid.startTime
@@ -41,12 +44,16 @@ sylius_grid:
                             "app.ui.etl_execution.statuses.success": "success"
                             "app.ui.etl_execution.statuses.running": "running"
                             "app.ui.etl_execution.statuses.failure": "failure"
+                            "app.ui.etl_execution.statuses.waiting": "waiting"
                 startTime:
                     type: date
                     label: app.ui.etl_execution.grid.startTime
                 endTime:
                     type: date
                     label: app.ui.etl_execution.grid.endTime
+                createTime:
+                    type: date
+                    label: app.ui.etl_execution.grid.createTime
             
             actions:
                 item:

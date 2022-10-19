@@ -6,8 +6,12 @@
     <span class="ui red label">
         <i class="exclamation alternate icon"></i>{{ "app.ui.etl_execution.statuses.failure"|trans }}
     </span>
+{% elseif data == "waiting" %}
+    <span class="ui grey label">
+        <i class="stopwatch icon"></i>{{ "app.ui.etl_execution.statuses.waiting"|trans }}
+    </span>
 {% else %}
     <span class="ui orange label">
-        <i class="stopwatch icon"></i>{{ "app.ui.etl_execution.statuses.running"|trans }}
+        <i class="stopwatch icon"></i>{{ "app.ui.etl_execution.statuses.waiting"|trans }}
     </span>
 {% endif %}
