@@ -17,6 +17,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class EtlController extends AbstractController
 {
+
     private EtlExecutionRepository $etlExecutionRepository;
     private ExecutionContextFactory $executionContextFactory;
     private EntityManagerInterface $em;
@@ -46,7 +47,7 @@ class EtlController extends AbstractController
     public function ExecuteAction(EtlExecution $etlExecution): Response
     {
         if ($etlExecution->getStatus() != EtlExecution::STATUS_WAITING) {
-            throw new EtlExecutionException("Etl execution has already been run %s.", $etlExecution);
+            throw new EtlExecutionException('Etl execution has already been run "%s".', $etlExecution->getId());
         }
 
         $etlExecution->setStatus($etlExecution::STATUS_QUEUED);
@@ -146,7 +147,7 @@ class EtlController extends AbstractController
     public function cancelAction(EtlExecution $etlExecution): Response
     {
         if ($etlExecution->getStatus() != EtlExecution::STATUS_WAITING) {
-            throw new EtlExecutionException("Etl execution has already been run %s.", $etlExecution);
+            throw new EtlExecutionException('Etl execution has already been run "%s".', $etlExecution->getId());
         }
 
         $this->em->remove($etlExecution);
