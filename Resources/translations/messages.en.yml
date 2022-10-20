@@ -49,5 +49,5 @@ app:
             total_waiting_execution: "Total waiting executions"
             average_success_execution_run_time: "Average success execution run time (seconds)"
         flash:
-            success: "Execution is in progress. Please, reload page if it is not in the list."
-            download_error: "An error has occurred while process running."
+            queued: "Execution process is in progress."
+            download_error: "An error has occurred while downloading file."
