@@ -73,19 +73,20 @@ class EtlController extends AbstractController
     {
         $etl = $this->etlExecutionRepository->findOneBy(['id' => $id]);
 
-        $urls = [];
-        if (!is_null($etl)) {
-            $context = $this->executionContextFactory->get(['etl' => ['execution' => $etl]]);
+        if (is_null($etl)) {
+            return $this->redirectToRoute('app_admin_etl_execution_index');
+        }
 
-            foreach ($context->getFileSystem()->listContents("/") as $file) {
-                $pathInfo = pathinfo($file);
-                if (isset($pathInfo['extension'])) {
-                    $urls[] = [
-                        'id' => $etl->getId(),
-                        'filename' => $pathInfo['filename'],
-                        'filetype' => $pathInfo['extension'] == 'log' ? 'log' : 'result'
-                    ];
-                }
+        $urls = [];
+        $context = $this->executionContextFactory->get(['etl' => ['execution' => $etl]]);
+        foreach ($context->getFileSystem()->listContents("/") as $file) {
+            $pathInfo = pathinfo($file);
+            if (isset($pathInfo['extension'])) {
+                $urls[] = [
+                    'id' => $etl->getId(),
+                    'filename' => $pathInfo['filename'],
+                    'filetype' => $pathInfo['extension'] == 'log' ? 'log' : 'result'
+                ];
             }
         }
 
