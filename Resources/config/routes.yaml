@@ -31,6 +31,15 @@ app_admin_etl_execution_execute:
             section: admin
             permission: true
             
+app_admin_etl_execution_cancel:
+    path: admin/etl-executions/cancel/{id}
+    methods: [ GET ]
+    defaults:
+        _controller: 'Oliverde8\PhpEtlSyliusAdminBundle\Controller\EtlController::cancelAction'
+        _sylius:
+            section: admin
+            permission: true
+            
 app_admin_etl_execution_download:
     path: admin/etl-executions/download/{id}/{filename}
     methods: [ GET ]

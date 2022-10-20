@@ -11,6 +11,7 @@ app:
                 status: "Status"
                 all: "All"
                 execute: "Execute"
+                cancel: "Cancel"
             show:
                 title: ETL Execution
                 details:
@@ -51,3 +52,4 @@ app:
         flash:
             queued: "Execution process is in progress."
             download_error: "An error has occurred while downloading file."
+            cancel: "Execution process has been canceled."

@@ -37,8 +37,11 @@ class EtlController extends AbstractController
         $this->messageBus = $messageBus;
         $this->translator = $translator;
     }
+
     /**
+     * @param EtlExecution $etlExecution
      * @return Response
+     * @throws EtlExecutionException
      */
     public function ExecuteAction(EtlExecution $etlExecution): Response
     {
@@ -66,7 +69,7 @@ class EtlController extends AbstractController
      * @param string $id
      * @return Response
      */
-    public function showAction(string $id)
+    public function showAction(string $id): Response
     {
         $etl = $this->etlExecutionRepository->findOneBy(['id' => $id]);
 
@@ -132,5 +135,27 @@ class EtlController extends AbstractController
             "app_admin_etl_execution_show",
             ['id' => $etlExecution->getId()]
         );
+    }
+
+    /**
+     * @param EtlExecution $etlExecution
+     * @return Response
+     * @throws EtlExecutionException
+     */
+    public function cancelAction(EtlExecution $etlExecution): Response
+    {
+        if ($etlExecution->getStatus() != EtlExecution::STATUS_WAITING) {
+            throw new EtlExecutionException("Etl execution has already been run %s.", $etlExecution);
+        }
+
+        $this->em->remove($etlExecution);
+        $this->em->flush();
+
+        $this->addFlash(
+            'success',
+            $this->translator->trans('app.ui.flash.cancel')
+        );
+
+        return $this->redirectToRoute('app_admin_etl_execution_index');
     }
 }
