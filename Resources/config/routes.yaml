@@ -40,11 +40,11 @@ app_admin_etl_execution_execute:
             section: admin
             permission: true
             
-app_admin_etl_execution_cancel:
-    path: admin/etl-executions/cancel/{id}
-    methods: [ GET ]
+app_admin_etl_execution_delete:
+    path: admin/etl-executions/delete/{id}
+    methods: [ DELETE ]
     defaults:
-        _controller: 'Oliverde8\PhpEtlSyliusAdminBundle\Controller\EtlController::cancelAction'
+        _controller: 'Oliverde8\PhpEtlSyliusAdminBundle\Controller\EtlController::deleteAction'
         _sylius:
             section: admin
             permission: true

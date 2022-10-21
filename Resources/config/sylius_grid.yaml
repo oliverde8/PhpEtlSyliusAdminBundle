@@ -4,7 +4,6 @@ sylius_grid:
             etl_execution_name: "@SyliusUi/Grid/Filter/select.html.twig"
         action:
             executeEtl: "@Oliverde8PhpEtlSyliusAdmin/etl/grid/actions/execute_etl.html.twig"
-            cancelEtl: "@Oliverde8PhpEtlSyliusAdmin/etl/grid/actions/cancel_etl.html.twig"
             editEtl: "@Oliverde8PhpEtlSyliusAdmin/etl/grid/actions/update_etl.html.twig"
     grids: 
         app_admin_etl_execution:
@@ -69,16 +68,6 @@ sylius_grid:
                         type: show
                         enabled: true
                         label: ""
-                    executeEtl:
-                        type: executeEtl
-                        label: app.ui.etl_execution.grid.execute
-                        options:
-                            link:
-                                route: app_admin_etl_execution_execute
-                                parameters:
-                                    id: resource.id
-                                data:
-                                    status: resource.status
                     editEtl:
                         type: editEtl
                         label: app.ui.etl_execution.grid.edit
@@ -89,12 +78,23 @@ sylius_grid:
                                     id: resource.id
                                 data:
                                     status: resource.status
-                    cancelEtl:
-                        type: cancelEtl
-                        label: app.ui.etl_execution.grid.cancel
+                    delete:
+                        type: delete
+                        label: app.ui.etl_execution.grid.delete
+                        enabled: true
                         options:
                             link:
-                                route: app_admin_etl_execution_cancel
+                                route: app_admin_etl_execution_delete
+                                parameters:
+                                    id: resource.id
+                                data:
+                                    status: resource.status
+                    executeEtl:
+                        type: executeEtl
+                        label: app.ui.etl_execution.grid.execute
+                        options:
+                            link:
+                                route: app_admin_etl_execution_execute
                                 parameters:
                                     id: resource.id
                                 data:

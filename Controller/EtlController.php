@@ -146,12 +146,12 @@ class EtlController extends AbstractController
      * @return Response
      * @throws EtlExecutionException
      */
-    public function cancelAction(EtlExecution $etlExecution): Response
+    public function deleteAction(EtlExecution $etlExecution): Response
     {
         if ($etlExecution->getStatus() != EtlExecution::STATUS_WAITING) {
             throw new EtlExecutionException('Etl execution has already been run "%s".', $etlExecution->getId());
         }
-
+        dd($etlExecution);
         $this->em->remove($etlExecution);
         $this->em->flush();
 
@@ -163,7 +163,12 @@ class EtlController extends AbstractController
         return $this->redirectToRoute('app_admin_etl_execution_index');
     }
 
-    public function editAction(EtlExecution $etlExecution, Request $request)
+    /**
+     * @param EtlExecution $etlExecution
+     * @param Request $request
+     * @return Response
+     */
+    public function editAction(EtlExecution $etlExecution, Request $request): Response
     {
         $form = $this->createForm(EtlExecutionType::class, $etlExecution);
         $form->handleRequest($request);

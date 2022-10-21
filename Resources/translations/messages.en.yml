@@ -11,7 +11,7 @@ app:
                 status: "Status"
                 all: "All"
                 execute: "Execute"
-                cancel: "Cancel"
+                delete: "Delete"
                 edit: "Update"
             show:
                 title: ETL Execution
