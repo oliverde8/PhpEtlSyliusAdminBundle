@@ -1,0 +1,6 @@
+{% import '@SyliusUi/Macro/buttons.html.twig' as buttons %}
+
+{% if options.link.data.status == 'waiting' %}
+    {% set path = options.link.url|default(path(options.link.route, options.link.parameters)) %}
+    {{ buttons.default(path, action.label, null, 'edit', 'orange') }}
+{% endif %}

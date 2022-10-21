@@ -1,0 +1,46 @@
+<div class="ui segment">
+    {{ form_start(form, {'method': 'POST', 'attr': {'class': 'ui loadable form'}}) }}
+    {{ form_row(form.name, {'attr': {'class': 'field'}}) }}
+    {{ form_row(form.username, {'attr': {'class': 'field'}}) }}
+    {{ form_row(form.inputData, {'attr': {'class': 'field'}}) }}
+    {{ form_row(form.inputOptions, {'attr': {'class': 'field'}}) }}
+    {{ form_row(form.definition, {'attr': {'class': 'field'}}) }}
+    <div class="ui buttons">
+        <button class="ui labeled icon primary button" type="submit"><i class="save icon"></i>{{ 'app.ui.etl_execution.edit.save'|trans }}</button>
+        <a href="{{ path('app_admin_etl_execution_index') }}" class="ui button">{{ 'app.ui.etl_execution.edit.cancel'|trans }}</a>
+    </div>
+    {{ form_end(form) }}
+</div>
+
+    {# <form name="etl_execution" method="post" action="/admin/etl-executions/new" class="ui loadable form" novalidate="novalidate">
+
+        <div id="etl_execution">
+            <div class="required field">
+                <label for="etl_execution_name" class="required">Name</label>
+                <input type="text" id="etl_execution_name" name="etl_execution[name]" required="required">
+            </div>
+            <div class="field">
+                <label for="etl_execution_username">Username</label>
+                <input type="text" id="etl_execution_username" name="etl_execution[username]">
+            </div>
+            <div class="field">
+                <label for="etl_execution_inputData">Input data</label>
+                <textarea id="etl_execution_inputData" name="etl_execution[inputData]"></textarea>
+            </div>
+            <div class="field">
+                <label for="etl_execution_inputOptions">Input options</label>
+                <textarea id="etl_execution_inputOptions" name="etl_execution[inputOptions]"></textarea>
+            </div>
+            <div class="required field">
+                <label for="etl_execution_definition" class="required">Definition</label>
+                <textarea id="etl_execution_definition" name="etl_execution[definition]" required="required"></textarea>
+            </div>
+            <input type="hidden" id="etl_execution__token" name="etl_execution[_token]" value="e52879597aebda27b935bda80415.W0B2QaWeD2EaPlvy-i9W9b1wpeGP_w-z_iG-tCmED1c.HXQaDu72RRZIRwqojBcdgt5A04fHrEzmmEKNjW_CZS0rJSAi8cE5PkxMYw">
+        </div>
+
+        <div class="ui hidden divider"></div>
+        <div class="ui buttons">
+            <button class="ui labeled icon primary button" type="submit"><i class="plus icon"></i>Créer</button>
+            <a href="/admin/etl-executions/" class="ui button">Annuler</a>
+        </div>
+    </form>  #}

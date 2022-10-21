@@ -5,6 +5,7 @@ sylius_grid:
         action:
             executeEtl: "@Oliverde8PhpEtlSyliusAdmin/etl/grid/actions/execute_etl.html.twig"
             cancelEtl: "@Oliverde8PhpEtlSyliusAdmin/etl/grid/actions/cancel_etl.html.twig"
+            editEtl: "@Oliverde8PhpEtlSyliusAdmin/etl/grid/actions/update_etl.html.twig"
     grids: 
         app_admin_etl_execution:
             driver:
@@ -74,6 +75,16 @@ sylius_grid:
                         options:
                             link:
                                 route: app_admin_etl_execution_execute
+                                parameters:
+                                    id: resource.id
+                                data:
+                                    status: resource.status
+                    editEtl:
+                        type: editEtl
+                        label: app.ui.etl_execution.grid.edit
+                        options:
+                            link:
+                                route: app_admin_etl_execution_edit
                                 parameters:
                                     id: resource.id
                                 data:

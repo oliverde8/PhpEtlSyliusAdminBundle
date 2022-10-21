@@ -12,8 +12,10 @@ app:
                 all: "All"
                 execute: "Execute"
                 cancel: "Cancel"
+                edit: "Update"
             show:
                 title: ETL Execution
+                page_title: Show ETL
                 details:
                     title: "Details"
                     name: "Name"
@@ -35,6 +37,13 @@ app:
                     download:
                         log: "Download log file"
                         result: "Download result file"
+            edit:
+                title: "ETL Execution"
+                page_title: "Edit ETL"
+                save: "Save modifications"
+                cancel: "Cancel"
+                flash:
+                    success: "ETL has been modified."
             statuses:
                 success: "success"
                 failure: "Failed"

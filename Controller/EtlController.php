@@ -6,7 +6,9 @@ use Doctrine\ORM\EntityManagerInterface;
 use Oliverde8\PhpEtlBundle\Entity\EtlExecution;
 use Oliverde8\PhpEtlBundle\Message\EtlExecutionMessage;
 use Oliverde8\PhpEtlSyliusAdminBundle\Exception\EtlExecutionException;
+use Oliverde8\PhpEtlSyliusAdminBundle\Form\Type\Etl\EtlExecutionType;
 use Symfony\Component\HttpFoundation\HeaderUtils;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Oliverde8\PhpEtlSyliusAdminBundle\Repository\Etl\EtlExecutionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -60,7 +62,7 @@ class EtlController extends AbstractController
 
         $this->addFlash(
             'success',
-            $this->translator->trans('app.ui.flash.success')
+            $this->translator->trans('app.ui.flash.queued')
         );
 
         return $this->redirectToRoute("app_admin_etl_execution_index");
@@ -159,5 +161,28 @@ class EtlController extends AbstractController
         );
 
         return $this->redirectToRoute('app_admin_etl_execution_index');
+    }
+
+    public function editAction(EtlExecution $etlExecution, Request $request)
+    {
+        $form = $this->createForm(EtlExecutionType::class, $etlExecution);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->em->persist($etlExecution);
+            $this->em->flush();
+
+            $this->addFlash(
+                'success',
+                $this->translator->trans('app.ui.etl_execution.edit.flash.success')
+            );
+
+            return $this->redirectToRoute('app_admin_etl_execution_index');
+        }
+
+        return $this->render('@Oliverde8PhpEtlSyliusAdmin/etl/edit/edit.html.twig', [
+            'form' => $form->createView(),
+            'etl' => $etlExecution
+        ]);
     }
 }

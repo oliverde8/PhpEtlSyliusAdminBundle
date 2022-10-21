@@ -21,6 +21,15 @@ app_admin_etl_execution_dashboard:
         _sylius:
             section: admin
             permission: true
+
+app_admin_etl_execution_edit:
+    path: admin/etl-executions/edit/{id}
+    methods: [ GET, POST ]
+    defaults:
+        _controller: 'Oliverde8\PhpEtlSyliusAdminBundle\Controller\EtlController::editAction'
+        _sylius:
+            section: admin
+            permission: true
     
 app_admin_etl_execution_execute:
     path: admin/etl-executions/execute/{id}
