@@ -1,13 +1,13 @@
 {% extends '@SyliusAdmin/layout.html.twig' %}
 
-{% block title %}{{ 'app.ui.dashboard.title'|trans }} {{ parent() }}{% endblock %}
+{% block title %}{{ 'sylius.ui.dashboard.title'|trans }} {{ parent() }}{% endblock %}
 
 {% block content %}
     {% import '@SyliusUi/Macro/headers.html.twig' as headers %}
 
     <div class="ui stackable grid">
         <div class="twelve wide column">
-            {{ headers.default('app.ui.dashboard.title'|trans, 'home', 'app.ui.dashboard.subtitle'|trans) }}
+            {{ headers.default('sylius.ui.dashboard.title'|trans, 'home', 'sylius.ui.dashboard.subtitle'|trans) }}
         </div>
     </div>
 
@@ -18,7 +18,7 @@
                     <div class="column">
                         <div class="ui statistic">
                             <div class="label">
-                                {{ "app.ui.dashboard.total_etl"|trans }}
+                                {{ "sylius.ui.dashboard.total_etl"|trans }}
                             </div>
                             <div class="value">
                                 {{ totalEtl }}
@@ -28,7 +28,7 @@
                     <div class="column" >
                         <div class="ui statistic">
                             <div class="label">
-                                {{ "app.ui.dashboard.total_success_execution"|trans }}
+                                {{ "sylius.ui.dashboard.total_success_execution"|trans }}
                             </div>
                             <div class="value">
                                 {{ totalEtlSuccess }}
@@ -38,7 +38,7 @@
                     <div class="column">
                         <div class="ui statistic">
                             <div class="label">
-                                {{ "app.ui.dashboard.total_failure_execution"|trans }}
+                                {{ "sylius.ui.dashboard.total_failure_execution"|trans }}
                             </div>
                             <div class="value">
                                 {{ totalEtlFailure }}
@@ -51,7 +51,7 @@
                     <div class="column">
                         <div class="ui statistic">
                             <div class="label">
-                                {{ "app.ui.dashboard.total_waiting_execution"|trans }}
+                                {{ "sylius.ui.dashboard.total_waiting_execution"|trans }}
                             </div>
                             <div class="value">
                                 {{ totalEtlWaiting }}
@@ -61,7 +61,7 @@
                     <div class="column">
                         <div class="ui statistic">
                             <div class="label">
-                                {{ "app.ui.dashboard.average_success_execution_run_time"|trans }}
+                                {{ "sylius.ui.dashboard.average_success_execution_run_time"|trans }}
                             </div>
                             <div class="value">
                                 {{ averageSuccessRunTime }}

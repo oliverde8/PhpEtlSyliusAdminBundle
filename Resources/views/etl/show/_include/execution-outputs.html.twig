@@ -1,17 +1,17 @@
-<h3>{{ 'app.ui.etl_execution.show.execution_outputs.title'|trans }}</h3>
+<h3>{{ 'sylius.ui.etl_execution.show.execution_outputs.title'|trans }}</h3>
 <div class="ui column stackable grid">
     <div class="column">
         <div class="ui list very relaxed">
             <div class="item">
-                <div class="header">{{ 'app.ui.etl_execution.show.execution_outputs.files'|trans }}</div>
+                <div class="header">{{ 'sylius.ui.etl_execution.show.execution_outputs.files'|trans }}</div>
                 {% for url in urls %}
                     <dt>
-                        <a href="{{ path('app_admin_etl_execution_download', { id: url.id, filename: url.filename }) }}">{{ ('app.ui.etl_execution.show.execution_outputs.download.' ~ url.filetype)|trans }}</a>
+                        <a href="{{ path('app_admin_etl_execution_download', { id: url.id, filename: url.filename }) }}">{{ ('sylius.ui.etl_execution.show.execution_outputs.download.' ~ url.filetype)|trans }}</a>
                     </dt>
                 {% endfor %}
             </div>
             <div class="item">
-                <div class="header">{{ 'app.ui.etl_execution.show.execution_outputs.error_message'|trans }}</div>
+                <div class="header">{{ 'sylius.ui.etl_execution.show.execution_outputs.error_message'|trans }}</div>
                 <dt>{{ etl.errorMessage|nl2br }}</dt>
             </div>
         </div>

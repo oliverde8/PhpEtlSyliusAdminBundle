@@ -1,4 +1,4 @@
-app:
+sylius:
     ui:
         etl_executions: ETL Executions
         etl_execution:

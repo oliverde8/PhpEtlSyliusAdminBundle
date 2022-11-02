@@ -10,8 +10,8 @@ app_admin_etl_execution:
         permission: true
         vars:
             all:
-                subheader: app.ui.etl_execution.grid.title
-                header: app.ui.etl_execution.grid.title
+                subheader: sylius.ui.etl_execution.grid.title
+                header: sylius.ui.etl_execution.grid.title
 
 app_admin_etl_execution_dashboard:
     path: admin/etl-executions/dashboard

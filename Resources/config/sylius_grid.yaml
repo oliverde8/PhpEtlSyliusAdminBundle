@@ -19,18 +19,18 @@ sylius_grid:
                     label: "ID"
                 name:
                     type: string
-                    label: app.ui.etl_execution.grid.name
+                    label: sylius.ui.etl_execution.grid.name
                 createTime:
                     type: datetime
-                    label: app.ui.etl_execution.grid.createTime
+                    label: sylius.ui.etl_execution.grid.createTime
                 startTime:
                     type: datetime
-                    label: app.ui.etl_execution.grid.startTime
+                    label: sylius.ui.etl_execution.grid.startTime
                 endTime:
                     type: datetime
-                    label: app.ui.etl_execution.grid.endTime
+                    label: sylius.ui.etl_execution.grid.endTime
                 status:
-                    label: app.ui.etl_execution.grid.status
+                    label: sylius.ui.etl_execution.grid.status
                     type: twig
                     options:
                         template: "@Oliverde8PhpEtlSyliusAdmin/etl/grid/fields/etl_status.html.twig"
@@ -38,26 +38,26 @@ sylius_grid:
             filters:
                 name:
                     type: etl_execution_name
-                    label: app.ui.etl_execution.grid.name
+                    label: sylius.ui.etl_execution.grid.name
                 status:
                     type: select
-                    label: app.ui.etl_execution.grid.status
+                    label: sylius.ui.etl_execution.grid.status
                     form_options:
                         choices:
-                            "app.ui.etl_execution.statuses.success": "success"
-                            "app.ui.etl_execution.statuses.running": "running"
-                            "app.ui.etl_execution.statuses.failure": "failure"
-                            "app.ui.etl_execution.statuses.waiting": "waiting"
-                            "app.ui.etl_execution.statuses.queued": "queued"
+                            "sylius.ui.etl_execution.statuses.success": "success"
+                            "sylius.ui.etl_execution.statuses.running": "running"
+                            "sylius.ui.etl_execution.statuses.failure": "failure"
+                            "sylius.ui.etl_execution.statuses.waiting": "waiting"
+                            "sylius.ui.etl_execution.statuses.queued": "queued"
                 startTime:
                     type: date
-                    label: app.ui.etl_execution.grid.startTime
+                    label: sylius.ui.etl_execution.grid.startTime
                 endTime:
                     type: date
-                    label: app.ui.etl_execution.grid.endTime
+                    label: sylius.ui.etl_execution.grid.endTime
                 createTime:
                     type: date
-                    label: app.ui.etl_execution.grid.createTime
+                    label: sylius.ui.etl_execution.grid.createTime
             
             actions:
                 main:
@@ -70,7 +70,7 @@ sylius_grid:
                         label: ""
                     editEtl:
                         type: editEtl
-                        label: app.ui.etl_execution.grid.edit
+                        label: sylius.ui.etl_execution.grid.edit
                         options:
                             link:
                                 route: app_admin_etl_execution_edit
@@ -80,7 +80,7 @@ sylius_grid:
                                     status: resource.status
                     delete:
                         type: delete
-                        label: app.ui.etl_execution.grid.delete
+                        label: sylius.ui.etl_execution.grid.delete
                         enabled: true
                         options:
                             link:
@@ -91,7 +91,7 @@ sylius_grid:
                                     status: resource.status
                     executeEtl:
                         type: executeEtl
-                        label: app.ui.etl_execution.grid.execute
+                        label: sylius.ui.etl_execution.grid.execute
                         options:
                             link:
                                 route: app_admin_etl_execution_execute

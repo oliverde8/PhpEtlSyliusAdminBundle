@@ -1,14 +1,14 @@
 
-<h3>{{ 'app.ui.etl_execution.show.title'|trans }}</h3>
+<h3>{{ 'sylius.ui.etl_execution.show.title'|trans }}</h3>
 <div class="ui three column stackable grid">
     <div class="column">
         <div class="ui list very relaxed">
             <div class="item">
-                <div class="header">{{ 'app.ui.etl_execution.show.details.name'|trans }}</div>
+                <div class="header">{{ 'sylius.ui.etl_execution.show.details.name'|trans }}</div>
                 <dt>{{ etl.name }}</dt>
             </div>
             <div class="item">
-                <div class="header">{{ 'app.ui.etl_execution.show.details.status'|trans }}</div>
+                <div class="header">{{ 'sylius.ui.etl_execution.show.details.status'|trans }}</div>
                 <dt>
                     {% include '@Oliverde8PhpEtlSyliusAdmin/etl/show/_include/status.html.twig' with {data: etl.status} %}
                 </dt>
@@ -19,19 +19,19 @@
     <div class="column">
         <div class="ui list very relaxed">
             <div class="item">
-                <div class="header">{{ 'app.ui.etl_execution.show.details.created_time'|trans }}</div>
+                <div class="header">{{ 'sylius.ui.etl_execution.show.details.created_time'|trans }}</div>
                 <dt>{{ etl.createTime|format_datetime('short', 'medium') }}</dt>
             </div>
             <div class="item">
-                <div class="header">{{ 'app.ui.etl_execution.show.details.start_time'|trans }}</div>
+                <div class="header">{{ 'sylius.ui.etl_execution.show.details.start_time'|trans }}</div>
                 <dt>{{ etl.startTime|format_datetime('short', 'medium') }}</dt>
             </div>
             <div class="item">
-                <div class="header">{{ 'app.ui.etl_execution.show.details.end_time'|trans }}</div>
+                <div class="header">{{ 'sylius.ui.etl_execution.show.details.end_time'|trans }}</div>
                 <dt>{{ etl.endTime|format_datetime('short', 'medium') }}</dt>
             </div>
             <div class="item">
-                <div class="header">{{ 'app.ui.etl_execution.show.details.fail_time'|trans }}</div>
+                <div class="header">{{ 'sylius.ui.etl_execution.show.details.fail_time'|trans }}</div>
                 <dt>{{ etl.failTime|format_datetime('short', 'medium') }}</dt>
             </div>
         </div>

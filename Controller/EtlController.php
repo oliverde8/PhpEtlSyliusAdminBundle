@@ -62,7 +62,7 @@ class EtlController extends AbstractController
 
         $this->addFlash(
             'success',
-            $this->translator->trans('app.ui.flash.queued')
+            $this->translator->trans('sylius.ui.flash.queued')
         );
 
         return $this->redirectToRoute("app_admin_etl_execution_index");
@@ -132,7 +132,7 @@ class EtlController extends AbstractController
 
         $this->addFlash(
             'error',
-            $this->translator->trans("app.ui.etl_execution.flash.download_error")
+            $this->translator->trans("sylius.ui.etl_execution.flash.download_error")
         );
 
         return $this->redirectToRoute(
@@ -157,7 +157,7 @@ class EtlController extends AbstractController
 
         $this->addFlash(
             'success',
-            $this->translator->trans('app.ui.flash.cancel')
+            $this->translator->trans('sylius.ui.flash.cancel')
         );
 
         return $this->redirectToRoute('app_admin_etl_execution_index');
@@ -179,7 +179,7 @@ class EtlController extends AbstractController
 
             $this->addFlash(
                 'success',
-                $this->translator->trans('app.ui.etl_execution.edit.flash.success')
+                $this->translator->trans('sylius.ui.etl_execution.edit.flash.success')
             );
 
             return $this->redirectToRoute('app_admin_etl_execution_index');

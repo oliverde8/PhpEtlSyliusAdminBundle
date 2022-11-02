@@ -1,17 +1,17 @@
 {% if data == "success" %}
     <span class="ui green label">
-        <i class="checkmark icon"></i>{{ "app.ui.etl_execution.statuses.success"|trans }}
+        <i class="checkmark icon"></i>{{ "sylius.ui.etl_execution.statuses.success"|trans }}
     </span>
 {% elseif data == "failure" %}
     <span class="ui red label">
-        <i class="exclamation alternate icon"></i>{{ "app.ui.etl_execution.statuses.failure"|trans }}
+        <i class="exclamation alternate icon"></i>{{ "sylius.ui.etl_execution.statuses.failure"|trans }}
     </span>
 {% elseif data == "waiting" %}
     <span class="ui grey label">
-        <i class="stopwatch icon"></i>{{ "app.ui.etl_execution.statuses.waiting"|trans }}
+        <i class="stopwatch icon"></i>{{ "sylius.ui.etl_execution.statuses.waiting"|trans }}
     </span>
 {% elseif data == "queued" %}
     <span class="ui orange label">
-        <i class="stopwatch icon"></i>{{ "app.ui.etl_execution.statuses.queued"|trans }}
+        <i class="stopwatch icon"></i>{{ "sylius.ui.etl_execution.statuses.queued"|trans }}
     </span>
 {% endif %}

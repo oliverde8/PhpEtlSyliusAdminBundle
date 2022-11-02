@@ -28,16 +28,16 @@ final class AdminMenuListener
         $menu = $event->getMenu();
         $menu
             ->addChild('execution')
-            ->setLabel($this->translator->trans('app.ui.etl_executions'));
+            ->setLabel($this->translator->trans('sylius.ui.etl_executions'));
 
         if ($executionsMenu = $menu->getChild('execution')) {
 
             $dashboardMenu = $this->menuFactory->createItem('etl_executions_dashboard', ['route' => 'app_admin_etl_execution_dashboard'])
-                ->setLabel($this->translator->trans('app.ui.dashboard.title'))
+                ->setLabel($this->translator->trans('sylius.ui.dashboard.title'))
                 ->setLabelAttribute('icon', 'options');
 
             $gridMenu = $this->menuFactory->createItem('etl_executions_grid', ['route' => 'app_admin_etl_execution_index'])
-                ->setLabel($this->translator->trans('app.ui.etl_executions'))
+                ->setLabel($this->translator->trans('sylius.ui.etl_executions'))
                 ->setLabelAttribute('icon', 'file');
 
             $executionsMenu->addChild($dashboardMenu);

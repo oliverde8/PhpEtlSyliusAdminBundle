@@ -25,7 +25,7 @@ class EtlExecutionNameFilterType extends AbstractType
             'choice_loader' => new CallbackChoiceLoader(function () {
                 $names = $this->etlExecutionRepository->getEtlExecutionNames();
 
-                $choices = ["app.ui.etl_execution.grid.all" => "all"];
+                $choices = ["sylius.ui.etl_execution.grid.all" => "all"];
                 foreach ($names as $name) {
                     $choices[$name['name']] = $name['name'];
                 }
