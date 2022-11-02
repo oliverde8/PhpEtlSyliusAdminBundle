@@ -10,7 +10,7 @@ class JsonTransformer implements DataTransformerInterface
     public function transform($value)
     {
         if (is_null($value) || $value == '[]') {
-            return '';
+            return '[]';
         }
 
         return json_encode($value);
@@ -18,6 +18,10 @@ class JsonTransformer implements DataTransformerInterface
 
     public function reverseTransform($value)
     {
+        if (is_null($value)) {
+            return '[]';
+        }
+
         return json_decode($value, true);
     }
 }
