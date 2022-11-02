@@ -63,4 +63,18 @@ framework:
             'Oliverde8\PhpEtlBundle\Message\EtlExecutionMessage': etl_async
 ```
 
-7. Create an ETL chain to execute: see the doc from  [this page](https://github.com/oliverde8/phpEtlBundle#creating-an-etl-chain)
+7. Configure KNP_Gaufrette:
+```yml
+# config/packages/knp_gaufrette.yaml
+knp_gaufrette:
+    adapters:
+        php_etl:
+            local:
+                directory: "%kernel.project_dir%/var/etl-finale"
+                create: true
+    filesystems:
+        php_etl:
+            adapter: php_etl
+```
+
+8. Create an ETL chain to execute: see the doc from  [this page](https://github.com/oliverde8/phpEtlBundle#creating-an-etl-chain)
