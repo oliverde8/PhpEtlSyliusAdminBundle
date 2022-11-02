@@ -20,16 +20,18 @@ return [
 ];
 ```
 
-2. Create Etl_execution table via migrations
+2. Create EtlExecution table via migrations
 
-3. Configure Etl execution grid:
+3. Create messenger_messages table via migrations
+
+4. Configure Etl execution grid:
 ```yml
 # config/sylius_grids/etl_execution.yml
 imports:
     - { resource: "@Oliverde8PhpEtlSyliusAdminBundle/Resources/config/sylius_grid.yaml" }
 ```
 
-4Configure Etl execution resource:
+5. Configure Etl execution resource:
 ```yml
 # config/sylius_resources/etl_execution.yml
 imports:
