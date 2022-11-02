@@ -2,23 +2,14 @@
 
 namespace Oliverde8\PhpEtlSyliusAdminBundle\Form\Type\Etl;
 
-use Oliverde8\PhpEtlSyliusAdminBundle\Form\DataTransformer\JsonTransformer;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 class EtlExecutionType extends AbstractType
 {
-    protected JsonTransformer $jsonTransformer;
-
-    public function __construct(
-        JsonTransformer $jsonTransformer
-    )
-    {
-        $this->jsonTransformer = $jsonTransformer;
-    }
-
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -34,7 +25,26 @@ class EtlExecutionType extends AbstractType
             ])
             ->add('definition', TextareaType::class);
 
-        $builder->get('inputData')->addModelTransformer($this->jsonTransformer);
-        $builder->get('inputOptions')->addModelTransformer($this->jsonTransformer);
+        $builder->get('inputData')
+            ->addModelTransformer(new CallbackTransformer(
+                function ($tagsAsArray) {
+                    return json_encode($tagsAsArray);
+                },
+                function ($tagsAsString) {
+                    return json_decode($tagsAsString, true);
+                }
+            ))
+        ;
+
+        $builder->get('inputOptions')
+            ->addModelTransformer(new CallbackTransformer(
+                function ($tagsAsArray) {
+                    return json_encode($tagsAsArray);
+                },
+                function ($tagsAsString) {
+                    return json_decode($tagsAsString, true);
+                }
+            ))
+        ;
     }
 }
