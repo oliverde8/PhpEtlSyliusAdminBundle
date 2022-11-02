@@ -3,7 +3,6 @@
 namespace Oliverde8\PhpEtlSyliusAdminBundle\Controller;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Oliverde8\PhpEtlSyliusAdminBundle\Entity\Etl\EtlExecution;
 use Oliverde8\PhpEtlBundle\Entity\EtlExecution as BaseEtlExecution;
 use Oliverde8\PhpEtlBundle\Message\EtlExecutionMessage;
 use Oliverde8\PhpEtlSyliusAdminBundle\Exception\EtlExecutionException;
@@ -43,12 +42,14 @@ class EtlController extends AbstractController
     }
 
     /**
-     * @param EtlExecution $etlExecution
+     * @param int $id
      * @return Response
      * @throws EtlExecutionException
      */
-    public function ExecuteAction(EtlExecution $etlExecution): Response
+    public function ExecuteAction(int $id): Response
     {
+        $etlExecution = $this->etlExecutionRepository->findOneBy(['id' => $id]);
+
         if ($etlExecution->getStatus() != BaseEtlExecution::STATUS_WAITING) {
             throw new EtlExecutionException('Etl execution has already been run "%s".', $etlExecution->getId());
         }
@@ -101,12 +102,13 @@ class EtlController extends AbstractController
     }
 
     /**
-     * @param EtlExecution $etlExecution
+     * @param int $id
      * @param string $filename
      * @return Response
      */
-    public function downloadAction(EtlExecution $etlExecution, string $filename): Response
+    public function downloadAction(int $id, string $filename): Response
     {
+        $etlExecution = $this->etlExecutionRepository->findOneBy(['id' => $id]);
         $context = $this->executionContextFactory->get(['etl' => ['execution' => $etlExecution]]);
 
         foreach ($context->getFileSystem()->listContents("/") as $file) {
@@ -143,12 +145,14 @@ class EtlController extends AbstractController
     }
 
     /**
-     * @param EtlExecution $etlExecution
+     * @param int $id
      * @return Response
      * @throws EtlExecutionException
      */
-    public function deleteAction(EtlExecution $etlExecution): Response
+    public function deleteAction(int $id): Response
     {
+        $etlExecution = $this->etlExecutionRepository->findOneBy(['id' => $id]);
+
         if ($etlExecution->getStatus() != BaseEtlExecution::STATUS_WAITING) {
             throw new EtlExecutionException('Etl execution has already been run "%s".', $etlExecution->getId());
         }
@@ -158,19 +162,21 @@ class EtlController extends AbstractController
 
         $this->addFlash(
             'success',
-            $this->translator->trans('sylius.ui.flash.cancel')
+            $this->translator->trans('sylius.ui.flash.delete')
         );
 
         return $this->redirectToRoute('app_admin_etl_execution_index');
     }
 
     /**
-     * @param EtlExecution $etlExecution
+     * @param int $id
      * @param Request $request
      * @return Response
      */
-    public function editAction(EtlExecution $etlExecution, Request $request): Response
+    public function editAction(int $id, Request $request): Response
     {
+        $etlExecution = $this->etlExecutionRepository->findOneBy(['id' => $id]);
+
         $form = $this->createForm(EtlExecutionType::class, $etlExecution);
         $form->handleRequest($request);
 
