@@ -27,3 +27,5 @@ services:
                 type: etl_execution_name
                 form_type: 'Oliverde8\PhpEtlSyliusAdminBundle\Form\Type\Filter\EtlExecutionNameFilterType'
 
+    Oliverde8_entity_etl_execution:
+        alias: 'Oliverde8\PhpEtlBundle\Entity\EtlExecution'
