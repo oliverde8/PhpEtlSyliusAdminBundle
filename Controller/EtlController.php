@@ -3,7 +3,8 @@
 namespace Oliverde8\PhpEtlSyliusAdminBundle\Controller;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Oliverde8\PhpEtlBundle\Entity\EtlExecution;
+use Oliverde8\PhpEtlSyliusAdminBundle\Entity\Etl\EtlExecution;
+use Oliverde8\PhpEtlBundle\Entity\EtlExecution as BaseEtlExecution;
 use Oliverde8\PhpEtlBundle\Message\EtlExecutionMessage;
 use Oliverde8\PhpEtlSyliusAdminBundle\Exception\EtlExecutionException;
 use Oliverde8\PhpEtlSyliusAdminBundle\Form\Type\Etl\EtlExecutionType;
@@ -48,7 +49,7 @@ class EtlController extends AbstractController
      */
     public function ExecuteAction(EtlExecution $etlExecution): Response
     {
-        if ($etlExecution->getStatus() != EtlExecution::STATUS_WAITING) {
+        if ($etlExecution->getStatus() != BaseEtlExecution::STATUS_WAITING) {
             throw new EtlExecutionException('Etl execution has already been run "%s".', $etlExecution->getId());
         }
 
@@ -148,10 +149,10 @@ class EtlController extends AbstractController
      */
     public function deleteAction(EtlExecution $etlExecution): Response
     {
-        if ($etlExecution->getStatus() != EtlExecution::STATUS_WAITING) {
+        if ($etlExecution->getStatus() != BaseEtlExecution::STATUS_WAITING) {
             throw new EtlExecutionException('Etl execution has already been run "%s".', $etlExecution->getId());
         }
-        dd($etlExecution);
+
         $this->em->remove($etlExecution);
         $this->em->flush();
 
