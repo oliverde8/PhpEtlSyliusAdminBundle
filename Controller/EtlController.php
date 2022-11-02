@@ -86,7 +86,7 @@ class EtlController extends AbstractController
         $context = $this->executionContextFactory->get(['etl' => ['execution' => $etl]]);
         foreach ($context->getFileSystem()->listContents("/") as $file) {
             $pathInfo = pathinfo($file);
-            if (isset($pathInfo['extension'])) {
+            if (isset($pathInfo['extension']) && !empty($pathInfo['extension'])) {
                 $urls[] = [
                     'id' => $etl->getId(),
                     'filename' => $pathInfo['filename'],
