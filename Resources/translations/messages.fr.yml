@@ -61,4 +61,4 @@ sylius:
             flash:
                 queued: "L'exécution du processus est en cours."
                 download_error: "Une erreur s'est produite lors du téléchargement du fichier."
-                cancel: "L'exécution du processus a été annulé."
+                delete: "L'exécution du processus a été supprimé."
