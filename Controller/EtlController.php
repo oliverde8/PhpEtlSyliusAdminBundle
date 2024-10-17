@@ -67,7 +67,7 @@ class EtlController extends AbstractController
             $this->translator->trans('sylius.ui.flash.queued')
         );
 
-        return $this->redirectToRoute("app_admin_etl_execution_index");
+        return $this->redirectToRoute("oliverde8_admin_etl_execution_index");
     }
 
     /**
@@ -79,7 +79,7 @@ class EtlController extends AbstractController
         $etl = $this->etlExecutionRepository->findOneBy(['id' => $id]);
 
         if (is_null($etl)) {
-            return $this->redirectToRoute('app_admin_etl_execution_index');
+            return $this->redirectToRoute('oliverde8_admin_etl_execution_index');
         }
 
         $urls = [];
@@ -139,7 +139,7 @@ class EtlController extends AbstractController
         );
 
         return $this->redirectToRoute(
-            "app_admin_etl_execution_show",
+            "oliverde8_admin_etl_execution_show",
             ['id' => $etlExecution->getId()]
         );
     }
@@ -165,7 +165,7 @@ class EtlController extends AbstractController
             $this->translator->trans('sylius.ui.flash.delete')
         );
 
-        return $this->redirectToRoute('app_admin_etl_execution_index');
+        return $this->redirectToRoute('oliverde8_admin_etl_execution_index');
     }
 
     /**
@@ -189,7 +189,7 @@ class EtlController extends AbstractController
                 $this->translator->trans('sylius.ui.etl_execution.edit.flash.success')
             );
 
-            return $this->redirectToRoute('app_admin_etl_execution_index');
+            return $this->redirectToRoute('oliverde8_admin_etl_execution_index');
         }
 
         return $this->render('@Oliverde8PhpEtlSyliusAdmin/etl/edit/edit.html.twig', [

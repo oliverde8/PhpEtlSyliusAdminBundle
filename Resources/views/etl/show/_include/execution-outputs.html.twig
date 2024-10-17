@@ -6,7 +6,7 @@
                 <div class="header">{{ 'sylius.ui.etl_execution.show.execution_outputs.files'|trans }}</div>
                 {% for url in urls %}
                     <dt>
-                        <a href="{{ path('app_admin_etl_execution_download', { id: url.id, filename: url.filename }) }}">{{ ('sylius.ui.etl_execution.show.execution_outputs.download.' ~ url.filetype)|trans }}</a>
+                        <a href="{{ path('oliverde8_admin_etl_execution_download', { id: url.id, filename: url.filename }) }}">{{ ('sylius.ui.etl_execution.show.execution_outputs.download.' ~ url.filetype)|trans }}</a>
                     </dt>
                 {% endfor %}
             </div>

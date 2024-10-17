@@ -6,7 +6,7 @@ sylius_grid:
             executeEtl: "@Oliverde8PhpEtlSyliusAdmin/etl/grid/actions/execute_etl.html.twig"
             editEtl: "@Oliverde8PhpEtlSyliusAdmin/etl/grid/actions/update_etl.html.twig"
     grids: 
-        app_admin_etl_execution:
+        oliverde8_admin_etl_execution:
             driver:
                 name: doctrine/orm
                 options:
@@ -73,7 +73,7 @@ sylius_grid:
                         label: sylius.ui.etl_execution.grid.edit
                         options:
                             link:
-                                route: app_admin_etl_execution_edit
+                                route: oliverde8_admin_etl_execution_edit
                                 parameters:
                                     id: resource.id
                                 data:
@@ -84,7 +84,7 @@ sylius_grid:
                         enabled: true
                         options:
                             link:
-                                route: app_admin_etl_execution_delete
+                                route: oliverde8_admin_etl_execution_delete
                                 parameters:
                                     id: resource.id
                                 data:
@@ -94,7 +94,7 @@ sylius_grid:
                         label: sylius.ui.etl_execution.grid.execute
                         options:
                             link:
-                                route: app_admin_etl_execution_execute
+                                route: oliverde8_admin_etl_execution_execute
                                 parameters:
                                     id: resource.id
                                 data:

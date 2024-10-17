@@ -6,7 +6,8 @@ services:
     
     Oliverde8\PhpEtlSyliusAdminBundle\:
         resource: '../../'
-
+        exclude: '../../{Entity,Migrations,Exception}'
+        
     Oliverde8\PhpEtlSyliusAdminBundle\Controller\EtlController:
         class: 'Oliverde8\PhpEtlSyliusAdminBundle\Controller\EtlController'
         arguments:

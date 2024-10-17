@@ -24,23 +24,24 @@ return [
 
 3. Create messenger_messages table via migrations
 
-4. Configure Etl execution grid:
+4. Import configs
 ```yml
-# config/sylius_grids/etl_execution.yml
+# config/packages/etl.yaml
 imports:
-    - { resource: "@Oliverde8PhpEtlSyliusAdminBundle/Resources/config/sylius_grid.yaml" }
+    - { resource: "@Oliverde8PhpEtlSyliusAdminBundle/Resources/config/config.yaml" }
 ```
 
-5. Configure Etl execution resource:
-```yml
-# config/sylius_resources/etl_execution.yml
-imports:
-    - { resource: "@Oliverde8PhpEtlSyliusAdminBundle/Resources/config/sylius_resources.yaml" }
+5. Import routes
+```yaml
+# config/routes/etl.yaml
+oliverde8_etl:
+    resource: '@Oliverde8PhpEtlSyliusAdminBundle/Resources/config/routing.yaml'
+
 ```
 
 6. Configure EtlExecution Message:
 ```yml
-# config/packages/messenger.yml
+# config/packages/messenger.yaml
 framework:
     messenger:
         # Uncomment this (and the failed transport below) to send failed messages to this transport for later handling.
@@ -63,18 +64,6 @@ framework:
             'Oliverde8\PhpEtlBundle\Message\EtlExecutionMessage': etl_async
 ```
 
-7. Configure KNP_Gaufrette:
-```yml
-# config/packages/knp_gaufrette.yaml
-knp_gaufrette:
-    adapters:
-        php_etl:
-            local:
-                directory: "%kernel.project_dir%/var/etl-finale"
-                create: true
-    filesystems:
-        php_etl:
-            adapter: php_etl
-```
+
 
 8. Create an ETL chain to execute: see the doc from  [this page](https://github.com/oliverde8/phpEtlBundle#creating-an-etl-chain)
