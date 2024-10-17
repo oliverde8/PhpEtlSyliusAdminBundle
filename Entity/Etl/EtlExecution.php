@@ -14,4 +14,15 @@ class EtlExecution extends BaseEtlExecution implements ResourceInterface
     {
         parent::__construct('', '', [], []);
     }
+
+    public function setName(?string $name): BaseEtlExecution
+    {
+        return BaseEtlExecution::setName($name ?? "");
+    }
+
+
+    public function setDefinition(?string $definition): BaseEtlExecution
+    {
+        return BaseEtlExecution::setDefinition($definition ?? "");
+    }
 }

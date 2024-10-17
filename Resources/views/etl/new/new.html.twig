@@ -1,0 +1,14 @@
+{% extends '@SyliusAdmin/layout.html.twig' %}
+
+{% block title %}{{ 'sylius.ui.etl_execution.new.page_title'|trans }} {{ parent() }}{% endblock %}
+
+{% form_theme form '@SyliusAdmin/Form/theme.html.twig' %}
+
+{% block content %}
+    {{ component('Oliverde8EtlNewForm',
+        {
+            initialData: etl,
+            form: form
+        })
+    }}
+{% endblock %}

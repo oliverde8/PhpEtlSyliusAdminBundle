@@ -7,6 +7,8 @@ use Oliverde8\Component\PhpEtl\ChainBuilder;
 use Oliverde8\Component\PhpEtl\Output\MermaidStaticOutput;
 use Oliverde8\PhpEtlBundle\Entity\EtlExecution as BaseEtlExecution;
 use Oliverde8\PhpEtlBundle\Message\EtlExecutionMessage;
+use Oliverde8\PhpEtlBundle\Services\ChainProcessorsManager;
+use Oliverde8\PhpEtlSyliusAdminBundle\Entity\Etl\EtlExecution;
 use Oliverde8\PhpEtlSyliusAdminBundle\Exception\EtlExecutionException;
 use Oliverde8\PhpEtlSyliusAdminBundle\Form\Type\Etl\EtlExecutionType;
 use Symfony\Component\HttpFoundation\HeaderUtils;
@@ -29,31 +31,8 @@ class EtlController extends AbstractController
         private readonly MessageBusInterface $messageBus,
         private readonly TranslatorInterface $translator,
         private readonly ChainBuilder $chainBuilder,
+        private readonly ChainProcessorsManager $chainProcessorsManager,
     ) {}
-
-    public function executeAction(int $id): Response
-    {
-        $etlExecution = $this->etlExecutionRepository->findOneBy(['id' => $id]);
-
-        if ($etlExecution->getStatus() != BaseEtlExecution::STATUS_WAITING) {
-            throw new EtlExecutionException('Etl execution has already been run "%s".', $etlExecution->getId());
-        }
-
-        $etlExecution->setStatus($etlExecution::STATUS_QUEUED);
-        $this->em->persist($etlExecution);
-        $this->em->flush();
-
-        /** @var int $executionId */
-        $executionId = $etlExecution->getId();
-        $this->messageBus->dispatch(new EtlExecutionMessage($executionId));
-
-        $this->addFlash(
-            'success',
-            $this->translator->trans('sylius.ui.flash.queued')
-        );
-
-        return $this->redirectToRoute("oliverde8_admin_etl_execution_index");
-    }
 
     public function showAction(string $id): Response
     {
@@ -125,26 +104,31 @@ class EtlController extends AbstractController
         return $this->redirectToRoute('oliverde8_admin_etl_execution_index');
     }
 
-    public function editAction(int $id, Request $request): Response
+    public function newAction(Request $request): Response
     {
-        $etlExecution = $this->etlExecutionRepository->findOneBy(['id' => $id]);
+        $etlExecution = new EtlExecution();
+        $etlExecution->setUsername($this->getUser()->getUserIdentifier());
 
         $form = $this->createForm(EtlExecutionType::class, $etlExecution);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $etlExecution->setDefinition($this->chainProcessorsManager->getRawDefinition($etlExecution->getName()));
             $this->em->persist($etlExecution);
             $this->em->flush();
+
+            $executionId = $etlExecution->getId();
+            $this->messageBus->dispatch(new EtlExecutionMessage($executionId));
 
             $this->addFlash(
                 'success',
                 $this->translator->trans('sylius.ui.etl_execution.edit.flash.success')
             );
 
-            return $this->redirectToRoute('oliverde8_admin_etl_execution_index');
+            return $this->redirectToRoute('oliverde8_admin_etl_execution_show', ['id' => $etlExecution->getId()]);
         }
 
-        return $this->render('@Oliverde8PhpEtlSyliusAdmin/etl/edit/edit.html.twig', [
+        return $this->render('@Oliverde8PhpEtlSyliusAdmin/etl/new/new.html.twig', [
             'form' => $form->createView(),
             'etl' => $etlExecution
         ]);

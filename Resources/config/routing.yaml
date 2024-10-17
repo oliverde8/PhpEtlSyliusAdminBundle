@@ -22,20 +22,11 @@ oliverde8_admin_etl_execution_dashboard:
             section: admin
             permission: true
 
-oliverde8_admin_etl_execution_edit:
-    path: admin/etl-executions/edit/{id}
+oliverde8_admin_etl_execution_new:
+    path: admin/etl-executions/execute-new
     methods: [ GET, POST ]
     defaults:
-        _controller: 'Oliverde8\PhpEtlSyliusAdminBundle\Controller\EtlController::editAction'
-        _sylius:
-            section: admin
-            permission: true
-    
-oliverde8_admin_etl_execution_execute:
-    path: admin/etl-executions/execute/{id}
-    methods: [ GET ]
-    defaults:
-        _controller: 'Oliverde8\PhpEtlSyliusAdminBundle\Controller\EtlController::executeAction'
+        _controller: 'Oliverde8\PhpEtlSyliusAdminBundle\Controller\EtlController::newAction'
         _sylius:
             section: admin
             permission: true

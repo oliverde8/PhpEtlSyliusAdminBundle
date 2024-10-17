@@ -1,0 +1,29 @@
+
+<div {{ attributes }}>
+    <div class="ui segment">
+        {{ form_start(form, {'attr': {'class': 'ui form'}}) }}
+
+        <div class="field">
+            {{ form_row(form.name) }}
+        </div>
+
+        <div class="field">
+            {{ form_row(form.inputData) }}
+        </div>
+
+        <div class="field">
+            {{ form_row(form.inputOptions) }}
+        </div>
+
+        {% if form.definition is defined %}
+            {% do form.definition.setRendered %}
+            <textarea name="etl_execution[definition]">{{ this.RawDefinition }}</textarea>
+        {% endif %}
+
+        <div class="ui buttons">
+            <button class="ui labeled icon primary button" type="submit"><i class="save icon"></i>{{ 'sylius.ui.etl_execution.edit.save'|trans }}</button>
+            <a href="{{ path('oliverde8_admin_etl_execution_index') }}" class="ui button">{{ 'sylius.ui.etl_execution.edit.cancel'|trans }}</a>
+        </div>
+        {{ form_end(form) }}
+    </div>
+</div>
