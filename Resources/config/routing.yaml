@@ -35,7 +35,7 @@ oliverde8_admin_etl_execution_execute:
     path: admin/etl-executions/execute/{id}
     methods: [ GET ]
     defaults:
-        _controller: 'Oliverde8\PhpEtlSyliusAdminBundle\Controller\EtlController::ExecuteAction'
+        _controller: 'Oliverde8\PhpEtlSyliusAdminBundle\Controller\EtlController::executeAction'
         _sylius:
             section: admin
             permission: true

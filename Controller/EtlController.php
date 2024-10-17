@@ -3,6 +3,8 @@
 namespace Oliverde8\PhpEtlSyliusAdminBundle\Controller;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Oliverde8\Component\PhpEtl\ChainBuilder;
+use Oliverde8\Component\PhpEtl\Output\MermaidStaticOutput;
 use Oliverde8\PhpEtlBundle\Entity\EtlExecution as BaseEtlExecution;
 use Oliverde8\PhpEtlBundle\Message\EtlExecutionMessage;
 use Oliverde8\PhpEtlSyliusAdminBundle\Exception\EtlExecutionException;
@@ -15,38 +17,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Oliverde8\PhpEtlBundle\Services\ExecutionContextFactory;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Yaml\Yaml;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class EtlController extends AbstractController
 {
-
-    private EtlExecutionRepository $etlExecutionRepository;
-    private ExecutionContextFactory $executionContextFactory;
-    private EntityManagerInterface $em;
-    private MessageBusInterface $messageBus;
-    private TranslatorInterface $translator;
-
     public function __construct(
-        EtlExecutionRepository $etlExecutionRepository,
-        ExecutionContextFactory $executionContextFactory,
-        EntityManagerInterface $em,
-        MessageBusInterface $messageBus,
-        TranslatorInterface $translator
-    )
-    {
-        $this->etlExecutionRepository = $etlExecutionRepository;
-        $this->executionContextFactory = $executionContextFactory;
-        $this->em = $em;
-        $this->messageBus = $messageBus;
-        $this->translator = $translator;
-    }
+        private readonly EtlExecutionRepository $etlExecutionRepository,
+        private readonly ExecutionContextFactory $executionContextFactory,
+        private readonly EntityManagerInterface $em,
+        private readonly MessageBusInterface $messageBus,
+        private readonly TranslatorInterface $translator,
+        private readonly ChainBuilder $chainBuilder,
+    ) {}
 
-    /**
-     * @param int $id
-     * @return Response
-     * @throws EtlExecutionException
-     */
-    public function ExecuteAction(int $id): Response
+    public function executeAction(int $id): Response
     {
         $etlExecution = $this->etlExecutionRepository->findOneBy(['id' => $id]);
 
@@ -70,10 +55,6 @@ class EtlController extends AbstractController
         return $this->redirectToRoute("oliverde8_admin_etl_execution_index");
     }
 
-    /**
-     * @param string $id
-     * @return Response
-     */
     public function showAction(string $id): Response
     {
         $etl = $this->etlExecutionRepository->findOneBy(['id' => $id]);
@@ -89,66 +70,42 @@ class EtlController extends AbstractController
             if (isset($pathInfo['extension']) && !empty($pathInfo['extension'])) {
                 $urls[] = [
                     'id' => $etl->getId(),
-                    'filename' => $pathInfo['filename'],
+                    'filename' => $pathInfo['filename'] . "." . $pathInfo['extension'],
                     'filetype' => $pathInfo['extension'] == 'log' ? 'log' : 'result'
                 ];
             }
         }
 
+        $chainProcessor = $this->chainBuilder->buildChainProcessor(Yaml::parse($etl->getDefinition()));
+        $chainGraph = (new MermaidStaticOutput())->generateGrapText($chainProcessor);
+
         return $this->render('@Oliverde8PhpEtlSyliusAdmin/etl/show/show.html.twig', [
             'etl' => $etl,
-            'urls' => $urls
+            'urls' => $urls,
+            'graph' => $chainGraph,
         ]);
     }
 
-    /**
-     * @param int $id
-     * @param string $filename
-     * @return Response
-     */
     public function downloadAction(int $id, string $filename): Response
     {
-        $etlExecution = $this->etlExecutionRepository->findOneBy(['id' => $id]);
-        $context = $this->executionContextFactory->get(['etl' => ['execution' => $etlExecution]]);
+        $execution = $this->etlExecutionRepository->findOneBy(['id' => $id]);
+        $context = $this->executionContextFactory->get(['etl' => ['execution' => $execution]]);
 
-        foreach ($context->getFileSystem()->listContents("/") as $file) {
-            $pathInfo = pathinfo($file);
-            if ($pathInfo['filename'] == $filename) {
+        $file = $context->getFileSystem()->readStream($filename);
+        $response = new StreamedResponse(function () use ($file) {
+            $outputStream = fopen('php://output', 'wb');
+            stream_copy_to_stream($file, $outputStream);
+        });
 
-                $response = new StreamedResponse(function () use ($context, $file) {
-                    $outputStream = fopen('php://output', 'wb');
-                    $fileStream = $context->getFileSystem()->readStream($file);
-                    if ($outputStream && $fileStream) {
-                        stream_copy_to_stream($fileStream, $outputStream);
-                    }
-                });
-
-                $disposition = HeaderUtils::makeDisposition(
-                    HeaderUtils::DISPOSITION_ATTACHMENT,
-                    "execution_{$etlExecution->getId()}_" . basename($file)
-                );
-                $response->headers->set('Content-Disposition', $disposition);
-
-                return $response;
-            }
-        }
-
-        $this->addFlash(
-            'error',
-            $this->translator->trans("sylius.ui.etl_execution.flash.download_error")
+        $disposition = HeaderUtils::makeDisposition(
+            HeaderUtils::DISPOSITION_ATTACHMENT,
+            "execution-{$execution->getName()}-{$execution->getId()}-" . $filename
         );
+        $response->headers->set('Content-Disposition', $disposition);
 
-        return $this->redirectToRoute(
-            "oliverde8_admin_etl_execution_show",
-            ['id' => $etlExecution->getId()]
-        );
+        return $response;
     }
 
-    /**
-     * @param int $id
-     * @return Response
-     * @throws EtlExecutionException
-     */
     public function deleteAction(int $id): Response
     {
         $etlExecution = $this->etlExecutionRepository->findOneBy(['id' => $id]);
@@ -168,11 +125,6 @@ class EtlController extends AbstractController
         return $this->redirectToRoute('oliverde8_admin_etl_execution_index');
     }
 
-    /**
-     * @param int $id
-     * @param Request $request
-     * @return Response
-     */
     public function editAction(int $id, Request $request): Response
     {
         $etlExecution = $this->etlExecutionRepository->findOneBy(['id' => $id]);

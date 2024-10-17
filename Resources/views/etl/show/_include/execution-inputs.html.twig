@@ -1,20 +1,39 @@
+<!-- @TODO include this properly using package.json & stimulus controller-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/languages/yaml.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/languages/javascript.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/gh/WebCoder49/code-input@2.3/code-input.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/WebCoder49/code-input@2.3/code-input.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11.3.0/dist/mermaid.min.js"></script>
+
+{#<script>#}
+{#    codeInput.registerTemplate("syntax-highlighted", codeInput.templates.hljs(hljs, []));#}
+{#</script>#}
+
+<script>hljs.highlightAll();</script>
+
 <h3>{{ 'sylius.ui.etl_execution.show.execution_inputs.title'|trans }}</h3>
-<div class="ui three column stackable grid">
+<div class="ui two column stackable grid">
     <div class="column">
         <div class="ui list very relaxed">
             <div class="item">
                 <div class="header">{{ 'sylius.ui.etl_execution.show.execution_inputs.input_data'|trans }}</div>
-                <dt>{{ etl.inputData }}</dt>
+                <pre><code class="language-javascript" style="height: 80px">{{ etl.inputData }}</code></pre>
             </div>
             <div class="item">
                 <div class="header">{{ 'sylius.ui.etl_execution.show.execution_inputs.input_options'|trans }}</div>
-                <dt>{{ etl.inputOptions }}</dt>
+                <pre><code class="language-javascript" style="height: 80px">{{ etl.inputOptions }}</code></pre>
             </div>
             <div class="item">
                 <div class="header">{{ 'sylius.ui.etl_execution.show.execution_inputs.definition'|trans }}</div>
-                <dt>{{ etl.definition|nl2br }}</dt>
+                <pre><code class="language-yaml" style="height: 480px">{{ etl.definition }}</code></pre>
             </div>
         </div>
     </div>
+    <div class="column">
+        <pre class="mermaid">{{ graph }}</pre>
+    </div>
 </div>
-
