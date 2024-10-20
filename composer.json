@@ -13,7 +13,7 @@
         }
     ],
     "require": {
-        "php": ">=8.3",
+        "php": ">=8.2",
         "oliverde8/php-etl-bundle": "^v1.2.0-alpha1",
         "sylius/admin-bundle": "^1.13"
     },
