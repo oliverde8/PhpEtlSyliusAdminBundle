@@ -7,8 +7,6 @@
 <script src="https://cdn.jsdelivr.net/gh/WebCoder49/code-input@2.3/code-input.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/WebCoder49/code-input@2.3/code-input.min.css">
 
-<script src="https://cdn.jsdelivr.net/npm/mermaid@11.3.0/dist/mermaid.min.js"></script>
-
 {#<script>#}
 {#    codeInput.registerTemplate("syntax-highlighted", codeInput.templates.hljs(hljs, []));#}
 {#</script>#}
@@ -34,6 +32,11 @@
         </div>
     </div>
     <div class="column">
-        <pre class="mermaid">{{ graph }}</pre>
+        <pre class="mermaid"
+             data-controller="oliverde8-etl-graph-reload"
+             data-oliverde8-etl-graph-reload-continue-update-value="{{ continueUpdate }}"
+             data-oliverde8-etl-graph-reload-refresh-interval-value="{{ refreshInterval }}"
+             data-oliverde8-etl-graph-reload-api-url-value="{{ path('oliverde8_admin_etl_execution_show_graph', {'id': etl.id}) }}"
+        >{{ graph }}</pre>
     </div>
 </div>

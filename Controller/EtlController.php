@@ -38,7 +38,6 @@ class EtlController extends AbstractController
     public function showAction(string $id): Response
     {
         $etl = $this->etlExecutionRepository->findOneBy(['id' => $id]);
-
         if (is_null($etl)) {
             return $this->redirectToRoute('oliverde8_admin_etl_execution_index');
         }
@@ -56,17 +55,26 @@ class EtlController extends AbstractController
             }
         }
 
-        if ($etl->getStepStats()) {
-            $chainGraph = (new MermaidRunOutput())->generateGrapText($etl->getStepStats());
-        } else {
-            $chainProcessor = $this->chainBuilder->buildChainProcessor(Yaml::parse($etl->getDefinition()));
-            $chainGraph = (new MermaidStaticOutput())->generateGrapText($chainProcessor);
-        }
-
         return $this->render('@Oliverde8PhpEtlSyliusAdmin/etl/show/show.html.twig', [
             'etl' => $etl,
             'urls' => $urls,
-            'graph' => $chainGraph,
+            'graph' => $this->getGraph($etl),
+            'continueUpdate' => ($etl->getStatus() == BaseEtlExecution::STATUS_RUNNING || $etl->getStatus() == BaseEtlExecution::STATUS_WAITING) ? 'true' : 'false',
+            'refreshInterval' => $etl->getStatus() == BaseEtlExecution::STATUS_RUNNING ? 5 : 5
+        ]);
+    }
+
+    public function getGraphAction(string $id)
+    {
+        $etl = $this->etlExecutionRepository->findOneBy(['id' => $id]);
+        if (!$etl) {
+            throw $this->createNotFoundException();
+        }
+
+        return $this->json([
+            'graph' => $this->getGraph($etl),
+            'continueUpdate' => ($etl->getStatus() == BaseEtlExecution::STATUS_RUNNING || $etl->getStatus() == BaseEtlExecution::STATUS_WAITING) ? 'true' : 'false',
+            'refreshInterval' => $etl->getStatus() == BaseEtlExecution::STATUS_RUNNING ? 5 : 5,
         ]);
     }
 
@@ -137,5 +145,15 @@ class EtlController extends AbstractController
             'form' => $form->createView(),
             'etl' => $etlExecution
         ]);
+    }
+
+    protected function getGraph($etl) : string
+    {
+        if ($etl->getStepStats()) {
+            return (new MermaidRunOutput())->generateGrapText($etl->getStepStats());
+        }
+
+        $chainProcessor = $this->chainBuilder->buildChainProcessor(Yaml::parse($etl->getDefinition()));
+        return (new MermaidStaticOutput())->generateGrapText($chainProcessor);
     }
 }

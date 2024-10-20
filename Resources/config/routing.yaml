@@ -57,4 +57,13 @@ oliverde8_admin_etl_execution_show:
         _sylius:
             section: admin
             permission: true
+            
+oliverde8_admin_etl_execution_show_graph:
+    path: admin/etl-executions/{id}/graph
+    methods: [ GET ]
+    defaults:
+        _controller: 'Oliverde8\PhpEtlSyliusAdminBundle\Controller\EtlController::getGraphAction'
+        _sylius:
+            section: admin
+            permission: true
     
