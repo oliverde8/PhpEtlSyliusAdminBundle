@@ -4,6 +4,7 @@ namespace Oliverde8\PhpEtlSyliusAdminBundle\Controller;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Oliverde8\Component\PhpEtl\ChainBuilder;
+use Oliverde8\Component\PhpEtl\Output\MermaidRunOutput;
 use Oliverde8\Component\PhpEtl\Output\MermaidStaticOutput;
 use Oliverde8\PhpEtlBundle\Entity\EtlExecution as BaseEtlExecution;
 use Oliverde8\PhpEtlBundle\Message\EtlExecutionMessage;
@@ -55,8 +56,12 @@ class EtlController extends AbstractController
             }
         }
 
-        $chainProcessor = $this->chainBuilder->buildChainProcessor(Yaml::parse($etl->getDefinition()));
-        $chainGraph = (new MermaidStaticOutput())->generateGrapText($chainProcessor);
+        if ($etl->getStepStats()) {
+            $chainGraph = (new MermaidRunOutput())->generateGrapText($etl->getStepStats());
+        } else {
+            $chainProcessor = $this->chainBuilder->buildChainProcessor(Yaml::parse($etl->getDefinition()));
+            $chainGraph = (new MermaidStaticOutput())->generateGrapText($chainProcessor);
+        }
 
         return $this->render('@Oliverde8PhpEtlSyliusAdmin/etl/show/show.html.twig', [
             'etl' => $etl,
