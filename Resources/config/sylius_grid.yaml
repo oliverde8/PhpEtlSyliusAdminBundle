@@ -10,9 +10,9 @@ sylius_grid:
             driver:
                 name: doctrine/orm
                 options:
-                    class: Oliverde8\PhpEtlSyliusAdminBundle\Entity\Etl\EtlExecution
+                    class: Oliverde8\PhpEtlBundle\Entity\EtlExecution
                     repository:
-                        method: createAdminGridQueryBuilder
+                        method: [ expr:service('Oliverde8\\PhpEtlSyliusAdminBundle\\Repository\\Etl\\EtlExecutionRepository'), createAdminGridQueryBuilder ]
             fields:
                 id:
                     type: string

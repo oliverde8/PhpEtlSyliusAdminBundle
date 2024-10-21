@@ -9,7 +9,7 @@ use Oliverde8\Component\PhpEtl\Output\MermaidStaticOutput;
 use Oliverde8\PhpEtlBundle\Entity\EtlExecution as BaseEtlExecution;
 use Oliverde8\PhpEtlBundle\Message\EtlExecutionMessage;
 use Oliverde8\PhpEtlBundle\Services\ChainProcessorsManager;
-use Oliverde8\PhpEtlSyliusAdminBundle\Entity\Etl\EtlExecution;
+use Oliverde8\PhpEtlBundle\Entity\EtlExecution;
 use Oliverde8\PhpEtlSyliusAdminBundle\Exception\EtlExecutionException;
 use Oliverde8\PhpEtlSyliusAdminBundle\Form\Type\Etl\EtlExecutionType;
 use Symfony\Component\HttpFoundation\HeaderUtils;

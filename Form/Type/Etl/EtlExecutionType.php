@@ -3,7 +3,7 @@
 namespace Oliverde8\PhpEtlSyliusAdminBundle\Form\Type\Etl;
 
 use Oliverde8\PhpEtlBundle\Services\ChainProcessorsManager;
-use Oliverde8\PhpEtlSyliusAdminBundle\Entity\Etl\EtlExecution;
+use Oliverde8\PhpEtlBundle\Entity\EtlExecution;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;

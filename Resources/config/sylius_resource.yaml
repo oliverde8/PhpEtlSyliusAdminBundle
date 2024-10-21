@@ -5,3 +5,4 @@ sylius_resource:
             classes:
                 model: Oliverde8\PhpEtlSyliusAdminBundle\Entity\Etl\EtlExecution
                 form: Oliverde8\PhpEtlSyliusAdminBundle\Form\Type\Etl\EtlExecutionType
+                repository: Oliverde8\PhpEtlSyliusAdminBundle\Repository\Etl\EtlExecutionRepository

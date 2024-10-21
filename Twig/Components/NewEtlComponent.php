@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Oliverde8\PhpEtlSyliusAdminBundle\Twig\Components;
 
 use Oliverde8\PhpEtlBundle\Services\ChainProcessorsManager;
-use Oliverde8\PhpEtlSyliusAdminBundle\Entity\Etl\EtlExecution;
+use Oliverde8\PhpEtlBundle\Entity\EtlExecution;
 use Oliverde8\PhpEtlSyliusAdminBundle\Form\Type\Etl\EtlExecutionType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormInterface;
