@@ -24,7 +24,9 @@
             </div>
             <div class="item">
                 <div class="header">{{ 'sylius.ui.etl_execution.show.details.start_time'|trans }}</div>
-                <dt>{{ etl.startTime|format_datetime('short', 'medium') }}</dt>
+                {% if etl.startTime %}
+                    <dt>{{ etl.startTime|format_datetime('short', 'medium') }}</dt>
+                {% endif %}
             </div>
         </div>
     </div>
@@ -32,11 +34,15 @@
         <div class="ui list very relaxed">
             <div class="item">
                 <div class="header">{{ 'sylius.ui.etl_execution.show.details.end_time'|trans }}</div>
-                <dt>{{ etl.endTime|format_datetime('short', 'medium') }}</dt>
+                {% if etl.endTime %}
+                    <dt>{{ etl.endTime|format_datetime('short', 'medium') }}</dt>
+                {% endif %}
             </div>
             <div class="item">
                 <div class="header">{{ 'sylius.ui.etl_execution.show.details.fail_time'|trans }}</div>
-                <dt>{{ etl.failTime|format_datetime('short', 'medium') }}</dt>
+                {% if etl.failTime %}
+                    <dt>{{ etl.failTime|format_datetime('short', 'medium') }}</dt>
+                {% endif %}
             </div>
         </div>
     </div>
