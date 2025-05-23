@@ -3,7 +3,9 @@
 namespace Oliverde8\PhpEtlSyliusAdminBundle\Controller;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Monolog\Level;
 use Oliverde8\Component\PhpEtl\ChainBuilder;
+use Oliverde8\Component\PhpEtl\Model\ExecutionContext;
 use Oliverde8\Component\PhpEtl\Output\MermaidRunOutput;
 use Oliverde8\Component\PhpEtl\Output\MermaidStaticOutput;
 use Oliverde8\PhpEtlBundle\Entity\EtlExecution as BaseEtlExecution;
@@ -44,6 +46,7 @@ class EtlController extends AbstractController
 
         $urls = [];
         $context = $this->executionContextFactory->get(['etl' => ['execution' => $etl]]);
+        $hasLogs = false;
         foreach ($context->getFileSystem()->listContents("/") as $file) {
             $pathInfo = pathinfo($file);
             if (isset($pathInfo['extension']) && !empty($pathInfo['extension'])) {
@@ -60,7 +63,8 @@ class EtlController extends AbstractController
             'urls' => $urls,
             'graph' => $this->getGraph($etl),
             'continueUpdate' => ($etl->getStatus() == BaseEtlExecution::STATUS_RUNNING || $etl->getStatus() == BaseEtlExecution::STATUS_WAITING) ? 'true' : 'false',
-            'refreshInterval' => $etl->getStatus() == BaseEtlExecution::STATUS_RUNNING ? 5 : 5
+            'refreshInterval' => $etl->getStatus() == BaseEtlExecution::STATUS_RUNNING ? 5 : 5,
+            'logs' => $this->getLogs($context),
         ]);
     }
 
@@ -155,5 +159,53 @@ class EtlController extends AbstractController
 
         $chainProcessor = $this->chainBuilder->buildChainProcessor(Yaml::parse($etl->getDefinition()));
         return (new MermaidStaticOutput())->generateGrapText($chainProcessor);
+    }
+
+    protected function getLogs(ExecutionContext $context): array
+    {
+        $colors = [
+            Level::Debug->value => "gray",
+            Level::Info->value => "blue",
+            Level::Notice->value => "olive",
+            Level::Alert->value => "violet",
+            Level::Warning->value => "yellow",
+            Level::Critical->value => "orange",
+            Level::Error->value => "red",
+        ];
+
+        $logs = [];
+        if ($context->getFileSystem()->fileExists("execution.log")) {
+            $file = $context->getFileSystem()->readStream("execution.log");
+            $i = 0;
+            while ($i < 250 && $line = fgets($file)) {
+                $logs[] = [
+                    'color' => $colors[$this->getType($line)->value] ?? '',
+                    'message' => $line
+                ];
+                $i++;
+            }
+            fclose($file);
+        }
+
+        return $logs;
+    }
+
+    protected function getType(string $log): Level
+    {
+        if (str_contains($log, "] etl.INFO")) {
+            return Level::Info;
+        } else if (str_contains($log, "] etl.ALERT")) {
+            return Level::Alert;
+        } else if (str_contains($log, "] etl.CRITICAL")) {
+            return Level::Critical;
+        } else if (str_contains($log, "] etl.DEBUG")) {
+            return Level::Debug;
+        } else if (str_contains($log, "] etl.EMERGENCY")) {
+            return Level::Emergency;
+        } else if (str_contains($log, "] etl.NOTICE")) {
+            return Level::Notice;
+        } else if (str_contains($log, "] etl.WARNING")) {
+            return Level::Warning;
+        }
     }
 }

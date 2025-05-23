@@ -2,7 +2,11 @@
 
 <div class="ui list very relaxed">
     <div class="item">
-        <div class="header">{{ 'sylius.ui.etl_execution.show.execution_outputs.files'|trans }}</div>
+        <div class="header">
+            <h4>
+                {{ 'sylius.ui.etl_execution.show.execution_outputs.files'|trans }}
+            </h4>
+        </div>
         {% for url in urls %}
             <a class="ui labeled icon button" href="{{ path('oliverde8_admin_etl_execution_download', { id: url.id, filename: url.filename }) }}">
                 {% if url.filetype == "log" %}
@@ -15,8 +19,32 @@
         {% endfor %}
     </div>
 
+    {% if etl.errorMessage %}
+        <div class="item">
+            <div class="header">{{ 'sylius.ui.etl_execution.show.execution_outputs.error_message'|trans }}</div>
+            <dt>{{ etl.errorMessage|nl2br }}</dt>
+        </div>
+    {% endif %}
+
     <div class="item">
-        <div class="header">{{ 'sylius.ui.etl_execution.show.execution_outputs.error_message'|trans }}</div>
-        <dt>{{ etl.errorMessage|nl2br }}</dt>
+        <div class="content">
+            <div class="header">
+                <h4>Logs</h4>
+            </div>
+        </div>
     </div>
+    {% for log in logs %}
+        <div class="item">
+            <i class="chevron right middle aligned {{ log.color }} icon"></i>
+            <div class="content">
+                <div class="description">
+                    {{ log.message }}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+
+
+
 </div>
