@@ -1,0 +1,36 @@
+{% form_theme form '@SyliusAdmin/shared/form_theme.html.twig' %}
+
+<div class="container-xl" {{ attributes }}>
+    {{ form_start(form, {'attr': {'id': form.vars.id}}) }}
+    <div class="card-body">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row align-items-center">
+                            <div class="mb-3 field">
+                                {{ form_row(form.name) }}
+                            </div>
+
+                            <div class="mb-3 field">
+                                {{ form_row(form.inputData) }}
+                            </div>
+
+                            <div class="mb-3 field">
+                                {{ form_row(form.inputOptions) }}
+                            </div>
+
+                            {% if form.definition is defined %}
+                                {% do form.definition.setRendered %}
+                                <textarea name="etl_execution[definition]" class="form-control">
+                                    {{- this.RawDefinition -}}
+                                </textarea>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{ form_end(form) }}
+</div>

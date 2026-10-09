@@ -1,0 +1,15 @@
+{% extends '@SyliusAdmin/shared/layout/base.html.twig' %}
+
+{% set prefixes = prefixes|default({})|merge([
+    'sylius_admin.etl_execution.dashboard',
+    'sylius_admin.common'
+]) %}
+
+{% set header = 'app.ui.oliverde8_admin_etl_executions' %}
+
+{% block title %}{{ 'sylius.ui.dashboard.title'|trans }} {{ parent() }}{% endblock %}
+
+{% block body %}
+    {% hook 'show' with { _prefixes: prefixes } %}
+{% endblock %}
+

@@ -1,0 +1,13 @@
+{% extends '@SyliusAdmin/shared/layout/base.html.twig' %}
+
+{% block title %}{{ 'sylius.ui.etl_execution.show.page_title'|trans }} {{ parent() }}{% endblock %}
+
+{% set prefixes = prefixes|default({})|merge([
+    'sylius_admin.etl_execution',
+    'sylius_admin.common'
+]) %}
+
+
+{% block body %}
+    {% hook 'show' with { _prefixes: prefixes } %}
+{% endblock %}

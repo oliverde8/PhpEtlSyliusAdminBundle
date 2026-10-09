@@ -1,0 +1,43 @@
+{% set etl = hookable_metadata.context.etl %}
+
+<div class="container-xl mb-4">
+    <div class="card">
+        <div class="card-body">
+            <h3>{{ 'sylius.ui.etl_execution.show.title'|trans }}</h3>
+            <div class="row mb-4">
+                <div class="col-4">
+                    <div class="h4 mb-0">{{ 'sylius.ui.etl_execution.show.details.name'|trans }}</div>
+                    <p>{{ etl.name }}</p>
+                </div>
+                <div class="col-4">
+                    <div class="h4 mb-0">{{ 'sylius.ui.etl_execution.show.details.created_time'|trans }}</div>
+                    <p>{{ etl.createTime|format_datetime('short', 'medium') }}</p>
+                </div>
+                <div class="col-4">
+                    <div class="h4 mb-0">{{ 'sylius.ui.etl_execution.show.details.end_time'|trans }}</div>
+                    {% if etl.endTime %}
+                        <p>{{ etl.endTime|format_datetime('short', 'medium') }}</p>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="row mb-4">
+                <div class="col-4">
+                    <div class="h4 mb-0">{{ 'sylius.ui.etl_execution.show.details.status'|trans }}</div>
+                    {% hook 'status' %}
+                </div>
+                <div class="col-4">
+                    <div class="h4 mb-0">{{ 'sylius.ui.etl_execution.show.details.start_time'|trans }}</div>
+                    {% if etl.startTime %}
+                        <p>{{ etl.startTime|format_datetime('short', 'medium') }}</p>
+                    {% endif %}
+                </div>
+                <div class="col-4">
+                    <div class="h4 mb-0">{{ 'sylius.ui.etl_execution.show.details.fail_time'|trans }}</div>
+                    {% if etl.startTime %}
+                        <p>{{ etl.startTime|format_datetime('short', 'medium') }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
