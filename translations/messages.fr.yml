@@ -1,0 +1,68 @@
+sylius:
+    ui:
+        etl_executions: Exécutions ETL
+        etl_execution:
+            grid:
+                title: Exécutions ETL
+                name: "Nom"
+                createTime: "Création"
+                startTime: "Début"
+                endTime: "Fin"
+                status: "Statut"
+                all: "Tous"
+                execute: "Exécuter"
+                delete: "Supprimer"
+                edit: "Modifier"
+            show:
+                title: Exécution ETL
+                page_title: Exécution ETL
+                details:
+                    title: "Détails"
+                    name: "Nom"
+                    status: "Statut"
+                    created_time: "Date de création"
+                    start_time: "Date de début"
+                    end_time: "Date de fin"
+                    fail_time: "Date d'erreur"
+                execution_inputs:
+                    title: "Entrées d'exécution"
+                    input_data: "Données d'entrée"
+                    input_options: "Options d'entrée"
+                    definition: "Définition"
+                execution_outputs:
+                    title: "Sorties d'exécution"
+                    files: "Fichiers"
+                    error_message: "Message d'erreur"
+                    logs: "Logs"
+                    download:
+                        log: "Télécharger le fichier de log"
+                        result: "Télécharger le fichier de résultat"
+            edit:
+                title: "Exécutions ETL"
+                page_title: "Edition exécution ETL"
+                save: "Enregistrer les modifications"
+                cancel: "Annuler"
+                flash:
+                    success: "L'ETL a bien été modifié."
+            statuses:
+                success: "Succès"
+                failure: "Echec"
+                running: "En cours"
+                waiting: "En attente"
+                queued: "En attente d'exécution dans la queue"
+            new:
+                title: Nouvelle exécution ETL
+            input_data: Données d'entrée
+            input_options: Options d'entrée
+        dashboard:
+            title: Tableau de bord
+            subtitle: Vue d'ensemble des processus d'exécution
+            total_etl: "Nombre total d'exécutions"
+            total_failure_execution: "Exécutions en échec"
+            total_success_execution: "Exécutions en succès"
+            total_waiting_execution: "Exécutions en attente"
+            average_success_execution_run_time: "Temps moyen d'exécution des succès (secondes)"
+        flash:
+            queued: "L'exécution du processus est en cours."
+            download_error: "Une erreur s'est produite lors du téléchargement du fichier."
+            delete: "L'exécution du processus a été supprimé."

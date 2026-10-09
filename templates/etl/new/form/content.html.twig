@@ -1,0 +1,9 @@
+{% set etl = hookable_metadata.context.etl %}
+{% set form = hookable_metadata.context.form %}
+
+{{ component('Oliverde8EtlNewForm',
+    {
+        initialData: etl,
+        form: form
+    })
+}}

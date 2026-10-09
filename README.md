@@ -11,6 +11,7 @@ composer require oliverde8/php-etl-sylius-admin-bundle
 ## PhpEtlSyliusAdminBundle config
 
 1. Install this module:
+
 ```php
 # config/bundles.php
 
@@ -25,22 +26,22 @@ return [
 3. Create messenger_messages table via migrations
 
 4. Import configs
-```yml
+```yaml
 # config/packages/etl.yaml
 imports:
-    - { resource: "@Oliverde8PhpEtlSyliusAdminBundle/Resources/config/config.yaml" }
+    - { resource: "@Oliverde8PhpEtlSyliusAdminBundle/config/config.yaml" }
 ```
 
 5. Import routes
 ```yaml
 # config/routes/etl.yaml
 oliverde8_etl:
-    resource: '@Oliverde8PhpEtlSyliusAdminBundle/Resources/config/routing.yaml'
+    resource: '@Oliverde8PhpEtlSyliusAdminBundle/config/routing.yaml'
 
 ```
 
 6. Configure EtlExecution Message:
-```yml
+```yaml
 # config/packages/messenger.yaml
 framework:
     messenger:
@@ -64,6 +65,4 @@ framework:
             'Oliverde8\PhpEtlBundle\Message\EtlExecutionMessage': etl_async
 ```
 
-
-
-8. Create an ETL chain to execute: see the doc from  [this page](https://github.com/oliverde8/phpEtlBundle#creating-an-etl-chain)
+7. Create an ETL chain to execute: see the doc from  [this page](https://github.com/oliverde8/phpEtlBundle#creating-an-etl-chain)

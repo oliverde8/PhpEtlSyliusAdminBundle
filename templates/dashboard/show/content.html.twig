@@ -1,0 +1,56 @@
+{% set totalEtl = hookable_metadata.context.totalEtl %}
+{% set totalEtlFailure = hookable_metadata.context.totalEtlFailure %}
+{% set totalEtlSuccess = hookable_metadata.context.totalEtlSuccess %}
+{% set totalEtlWaiting = hookable_metadata.context.totalEtlWaiting %}
+{% set averageSuccessRunTime = hookable_metadata.context.averageSuccessRunTime %}
+
+<div class="container-xl">
+    <div class="card">
+        <div class="card-body">
+            <div class="row mb-4">
+                <div class="col-4">
+                    <div class="subheader text-center">
+                        {{ 'sylius.ui.dashboard.total_etl'|trans }}
+                    </div>
+                    <div class="h2 text-center">
+                        {{ totalEtl }}
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="subheader text-center">
+                        {{ "sylius.ui.dashboard.total_success_execution"|trans }}
+                    </div>
+                    <div class="h2 text-center">
+                        {{ totalEtlSuccess }}
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="subheader text-center">
+                        {{ "sylius.ui.dashboard.total_failure_execution"|trans }}
+                    </div>
+                    <div class="h2 text-center">
+                        {{ totalEtlFailure }}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="subheader text-center">
+                        {{ "sylius.ui.dashboard.total_waiting_execution"|trans }}
+                    </div>
+                    <div class="h2 text-center">
+                        {{ totalEtlWaiting }}
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="subheader text-center">
+                        {{ "sylius.ui.dashboard.average_success_execution_run_time"|trans }}
+                    </div>
+                    <div class="h2 text-center">
+                        {{ averageSuccessRunTime }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
