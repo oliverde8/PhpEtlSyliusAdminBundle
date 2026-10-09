@@ -1,0 +1,12 @@
+{% extends '@SyliusAdmin/shared/layout/base.html.twig' %}
+
+{% block title %}{{ 'sylius.ui.etl_execution.new.page_title'|trans }} {{ parent() }}{% endblock %}
+
+{% set prefixes = prefixes|default({})|merge([
+    'sylius_admin.etl_execution',
+    'sylius_admin.common'
+]) %}
+
+{% block body %}
+    {% hook 'create' with { _prefixes: prefixes } %}
+{% endblock %}

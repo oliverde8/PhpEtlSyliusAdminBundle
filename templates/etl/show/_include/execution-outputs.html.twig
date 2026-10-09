@@ -1,0 +1,60 @@
+{% set urls = hookable_metadata.context.urls %}
+{% set etl = hookable_metadata.context.etl %}
+{% set logs = hookable_metadata.context.logs %}
+
+<div class="container-xl mb-4">
+    <div class="card">
+        <div class="card-body">
+            <h3>{{ 'sylius.ui.etl_execution.show.execution_outputs.title'|trans }}</h3>
+            <div class="row mb-4">
+                <div class="col-12">
+                    <h4>
+                        {{ 'sylius.ui.etl_execution.show.execution_outputs.files'|trans }}
+                    </h4>
+                    {% for url in urls %}
+                        <a href="{{ path('oliverde8_admin_etl_execution_download', { id: url.id, filename: url.filename }) }}">
+                            <button type="button" class="btn btn-primary mb-4">
+                                {% if url.filetype == "log" %}
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-fill" viewBox="0 0 16 16">
+                                        <path d="M4 0h5.293A1 1 0 0 1 10 .293L13.707 4a1 1 0 0 1 .293.707V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2m5.5 1.5v2a1 1 0 0 0 1 1h2z"/>
+                                    </svg>
+                                {% else %}
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                                        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/>
+                                        <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708z"/>
+                                    </svg>
+                                {% endif %}
+                                &nbsp; {{ url.filename }}
+                            </button>
+                        </a>
+                    {% endfor %}
+
+                    {% if etl.errorMessage %}
+                        <div class="item">
+                            <div class="header">{{ 'sylius.ui.etl_execution.show.execution_outputs.error_message'|trans }}</div>
+                            <dt>{{ etl.errorMessage|nl2br }}</dt>
+                        </div>
+                    {% endif %}
+
+                    <div class="item">
+                        <div class="content">
+                            <div class="header">
+                                <h4>{{ 'sylius.ui.etl_execution.show.execution_outputs.logs'|trans }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                    {% for log in logs %}
+                        <div class="item">
+                            <i class="chevron right middle aligned {{ log.color }} icon"></i>
+                            <div class="content">
+                                <div class="description">
+                                    {{ log.message }}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

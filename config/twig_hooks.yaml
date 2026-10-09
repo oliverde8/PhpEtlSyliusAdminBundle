@@ -1,0 +1,66 @@
+sylius_twig_hooks:
+  hooks:
+    'sylius_admin.etl_execution.dashboard.show':
+      content:
+        template: '@SyliusAdmin/shared/crud/common/content.html.twig'
+        priority: 0
+    'sylius_admin.etl_execution.dashboard.show.content.header':
+      breadcrumbs:
+        template: '@SyliusAdmin/shared/crud/index/content/header/breadcrumbs.html.twig'
+        configuration:
+          title: sylius.ui.etl_executions
+    'sylius_admin.etl_execution.dashboard.show.content.header.title_block':
+      title:
+        template: '@SyliusAdmin/shared/crud/common/content/header/title_block/title.html.twig'
+        configuration:
+          title: sylius.ui.etl_executions
+    'sylius_admin.etl_execution.dashboard.show.content':
+      detail:
+        template: '@Oliverde8PhpEtlSyliusAdmin/dashboard/show/content.html.twig'
+    'sylius_admin.etl_execution.index.content.header.title_block':
+      title:
+        template: '@SyliusAdmin/shared/crud/common/content/header/title_block/title.html.twig'
+        configuration:
+          title: sylius.ui.etl_executions
+    'sylius_admin.etl_execution.create.content':
+      form:
+        enabled: false
+      content:
+        component: 'sylius_admin:new_etl:form'
+        props:
+          form: '@=_context.form'
+          initialData: '@=_context.etl'
+          template: '@Oliverde8PhpEtlSyliusAdmin/components/newForm.html.twig'
+    'sylius_admin.etl_execution.create.content.header':
+      breadcrumbs:
+        template: '@SyliusAdmin/shared/crud/index/content/header/breadcrumbs.html.twig'
+        configuration:
+          title: sylius.ui.etl_execution.new.title
+    'sylius_admin.etl_execution.create.content.header.title_block':
+      title:
+        template: '@SyliusAdmin/shared/crud/common/content/header/title_block/title.html.twig'
+        configuration:
+          title: sylius.ui.etl_execution.new.title
+    'sylius_admin.etl_execution.show.content.header':
+      breadcrumbs:
+        template: '@SyliusAdmin/shared/crud/index/content/header/breadcrumbs.html.twig'
+        configuration:
+          title: sylius.ui.etl_execution.show.title
+    'sylius_admin.etl_execution.show.content.header.title_block':
+      title:
+        template: '@SyliusAdmin/shared/crud/common/content/header/title_block/title.html.twig'
+        configuration:
+          title: sylius.ui.etl_execution.show.title
+    'sylius_admin.etl_execution.show.content':
+      details:
+        template: '@Oliverde8PhpEtlSyliusAdmin/etl/show/_include/details.html.twig'
+        priority: 100
+      inputs:
+        template: '@Oliverde8PhpEtlSyliusAdmin/etl/show/_include/execution-inputs.html.twig'
+        priority: 50
+      outputs:
+        template: '@Oliverde8PhpEtlSyliusAdmin/etl/show/_include/execution-outputs.html.twig'
+        priority: 0
+    'sylius_admin.etl_execution.show.content.status':
+      content:
+        template: '@Oliverde8PhpEtlSyliusAdmin/etl/show/_include/status.html.twig'
