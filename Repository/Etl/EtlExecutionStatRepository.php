@@ -36,21 +36,16 @@ class EtlExecutionStatRepository
         return $this->etlExecutionRepository->getNbEtlExecution([BaseEtlExecution::STATUS_WAITING]);
     }
 
-    public function getMiddleSuccessRunTime(): string
+    public function getAverageSuccessRunTime(): string
     {
-        $etls = $this->etlExecutionRepository->getEtlExecutionByStatus([BaseEtlExecution::STATUS_SUCCESS]);
+        $executions = $this->etlExecutionRepository->getEtlExecutionTotalRunTimeByStatus([BaseEtlExecution::STATUS_SUCCESS]);
 
-        if (empty($etls)) {
+        if ($executions['totalExecutions'] === 0) {
             return '00';
         }
 
-        $totalRunTime = 0;
-        foreach ($etls as $etl) {
-            /** @var BaseEtlExecution $etl */
-            $totalRunTime += $etl->getRunTime();
-        }
+        $averageRunTime = (int) $executions['totalRunTime'] / $executions['totalExecutions'];
 
-        $middleRunTime = $totalRunTime / count($etls);
-        return $middleRunTime == 0 ? '00' : number_format($middleRunTime, 2);
+        return $averageRunTime === 0 ? '00' : number_format($averageRunTime, 2);
     }
 }
