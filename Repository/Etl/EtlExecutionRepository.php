@@ -57,6 +57,17 @@ class EtlExecutionRepository extends BaseEtlExecutionRepository implements Repos
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
+    public function getEtlExecutionTotalRunTimeByStatus(array $statuses): array
+    {
+        $qb = $this
+            ->createQueryBuilder('ee')
+            ->select('SUM(ee.runTime) AS totalRunTime, COUNT(DISTINCT ee.id) AS totalExecutions')
+        ;
+        $qb = $this->filterByStatus($qb, $statuses);
+
+        return $qb->getQuery()->getSingleResult();
+    }
+
     private function filterByStatus(QueryBuilder $qb, array $statuses): QueryBuilder
     {
         $qb

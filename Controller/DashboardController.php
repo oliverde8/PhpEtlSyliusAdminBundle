@@ -24,7 +24,7 @@ class DashboardController extends AbstractController
             'totalEtlFailure' => $this->etlExecutionStatRepository->getNbTotalEtlFailure(),
             'totalEtlSuccess' => $this->etlExecutionStatRepository->getNbTotalEtlSuccess(),
             'totalEtlWaiting' => $this->etlExecutionStatRepository->getNbTotalEtlWaiting(),
-            'averageSuccessRunTime' => $this->etlExecutionStatRepository->getMiddleSuccessRunTime()
+            'averageSuccessRunTime' => $this->etlExecutionStatRepository->getAverageSuccessRunTime()
         ]);
     }
 }
