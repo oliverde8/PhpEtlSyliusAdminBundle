@@ -1,0 +1,23 @@
+{% from '@SyliusAdmin/shared/helper/breadcrumbs.html.twig' import breadcrumbs %}
+
+{% set page = hookable_metadata.configuration.page %}
+
+{% set items = [{ name: 'sylius.ui.dashboard', url: path('sylius_admin_dashboard') }] %}
+
+{% if page === 'dashboard' %}
+    {% set items = items|merge([{ name: 'sylius.ui.etl_dashboard.title', active: true }]) %}
+{% endif %}
+
+{% if page !== 'dashboard' %}
+    {% set items = items|merge([
+        page == 'index'
+            ? { name: 'sylius.ui.etl_executions', active: true }
+            : { name: 'sylius.ui.etl_executions', url: path('oliverde8_admin_etl_execution_index') }
+    ]) %}
+
+    {% if page in ['create', 'show'] %}
+        {% set items = items|merge([{ name: hookable_metadata.configuration.title, active: true }]) %}
+    {% endif %}
+{% endif %}
+
+{{ breadcrumbs(items) }}

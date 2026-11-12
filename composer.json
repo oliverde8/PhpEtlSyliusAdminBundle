@@ -9,17 +9,17 @@
             "homepage": "http://oliver-decramer.com"
         },
         {
-            "name": "RIGAUD Maxime "
+            "name": "RIGAUD Maxime"
         }
     ],
     "require": {
-        "php": ">=8.2",
-        "oliverde8/php-etl-bundle": "^v1.1.0-alpha3",
-        "sylius/admin-bundle": "^1.13"
+        "php": "^8.2",
+        "oliverde8/php-etl-bundle": "^v2.1",
+        "sylius/admin-bundle": "^2.0"
     },
     "autoload": {
         "psr-4": {
-            "Oliverde8\\PhpEtlSyliusAdminBundle\\": "."
+            "Oliverde8\\PhpEtlSyliusAdminBundle\\": "src/"
         }
     }
 }

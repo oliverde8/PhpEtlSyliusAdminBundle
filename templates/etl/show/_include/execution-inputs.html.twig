@@ -1,0 +1,48 @@
+{% set etl = hookable_metadata.context.etl %}
+{% set continueUpdate = hookable_metadata.context.continueUpdate %}
+{% set refreshInterval = hookable_metadata.context.refreshInterval %}
+{% set graph = hookable_metadata.context.graph %}
+
+<!-- @TODO include this properly using package.json & stimulus controller-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/languages/yaml.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/languages/javascript.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/gh/WebCoder49/code-input@2.3/code-input.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/WebCoder49/code-input@2.3/code-input.min.css">
+
+<script>hljs.highlightAll();</script>
+
+<link rel="stylesheet" href="/bundles/oliverde8phpetl/css/execution-graph.css">
+<script src="/bundles/oliverde8phpetl/vendor/cytoscape.min.js"></script>
+<script src="/bundles/oliverde8phpetl/vendor/dagre.min.js"></script>
+<script src="/bundles/oliverde8phpetl/vendor/cytoscape-dagre.min.js"></script>
+<script src="/bundles/oliverde8phpetl/js/execution-graph.js"></script>
+
+<div class="container-xl mb-4">
+    <div class="card">
+        <div class="card-body">
+            <h3>{{ 'sylius.ui.etl_execution.show.execution_inputs.title'|trans }}</h3>
+            <div class="row mb-4">
+                <div class="col-12 col-sm-6">
+                    <div class="item">
+                        <div class="header">{{ 'sylius.ui.etl_execution.show.execution_inputs.input_data'|trans }}</div>
+                        <pre><code class="language-javascript" style="height: 80px">{{ etl.inputData }}</code></pre>
+                    </div>
+                    <div class="item">
+                        <div class="header">{{ 'sylius.ui.etl_execution.show.execution_inputs.input_options'|trans }}</div>
+                        <pre><code class="language-javascript" style="height: 80px">{{ etl.inputOptions }}</code></pre>
+                    </div>
+                    <div class="item">
+                        <div class="header">{{ 'sylius.ui.etl_execution.show.execution_inputs.definition'|trans }}</div>
+                        <pre><code class="language-yaml" style="height: 480px">{{ etl.definition }}</code></pre>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6">
+                    {% include '@Oliverde8PhpEtl/observability/graph.html.twig' with { execution: etl } %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
