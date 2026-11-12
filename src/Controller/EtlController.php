@@ -15,6 +15,7 @@ use Oliverde8\PhpEtlBundle\Entity\EtlExecution as BaseEtlExecution;
 use Oliverde8\PhpEtlBundle\Message\EtlExecutionMessage;
 use Oliverde8\PhpEtlBundle\Services\ChainProcessorsManager;
 use Oliverde8\PhpEtlBundle\Services\ExecutionContextFactory;
+use Oliverde8\PhpEtlSyliusAdminBundle\Etl\ChainDefinitionFormatter;
 use Oliverde8\PhpEtlSyliusAdminBundle\Exception\EtlExecutionException;
 use Oliverde8\PhpEtlSyliusAdminBundle\Form\Type\Etl\EtlExecutionType;
 use Oliverde8\PhpEtlSyliusAdminBundle\Repository\Etl\EtlExecutionRepository;
@@ -132,7 +133,7 @@ class EtlController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $etlExecution->setDefinition($this->chainProcessorsManager->getRawDefinition($etlExecution->getName()));
+            $etlExecution->setDefinition(ChainDefinitionFormatter::format($this->chainProcessorsManager->getRawDefinition($etlExecution->getName())));
             $this->em->persist($etlExecution);
             $this->em->flush();
 
@@ -159,7 +160,10 @@ class EtlController extends AbstractController
             return (new MermaidRunOutput())->generateGrapText($etl->getStepStats());
         }
 
-        $chainProcessor = $this->chainBuilder->buildChainProcessor(Yaml::parse($etl->getDefinition()));
+        $chainProcessor = str_starts_with($etl->getDefinition(), ChainDefinitionFormatter::PHP_PREFIX)
+            ? $this->chainProcessorsManager->getProcessor($etl->getName(), [])
+            : $this->chainBuilder->buildChainProcessor(Yaml::parse($etl->getDefinition()));
+
         return (new MermaidStaticOutput())->generateGrapText($chainProcessor);
     }
 

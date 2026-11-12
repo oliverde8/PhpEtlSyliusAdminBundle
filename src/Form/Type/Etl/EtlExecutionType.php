@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace Oliverde8\PhpEtlSyliusAdminBundle\Form\Type\Etl;
 
 use Oliverde8\PhpEtlBundle\Entity\EtlExecution;
+use Oliverde8\PhpEtlBundle\Etl\ChainDefinitionInterface\ChainDefinitionInterface;
 use Oliverde8\PhpEtlBundle\Services\ChainProcessorsManager;
+use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -19,8 +21,11 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class EtlExecutionType extends AbstractType
 {
+    /** @param iterable<ChainDefinitionInterface> $chainDefinitions */
     public function __construct(
         protected readonly ChainProcessorsManager $chainProcessorsManager,
+        #[AutowireIterator('etl.chain_definition')]
+        protected readonly iterable $chainDefinitions = [],
     ) {
     }
 
@@ -65,6 +70,10 @@ class EtlExecutionType extends AbstractType
         $names = [];
         foreach ($this->chainProcessorsManager->getRawDefinitions() as $definitionName => $definition) {
             $names[$definitionName] = $definitionName;
+        }
+
+        foreach ($this->chainDefinitions as $definition) {
+            $names[$definition->getKey()] = $definition->getKey();
         }
 
         return $names;

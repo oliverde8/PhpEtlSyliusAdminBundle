@@ -14,8 +14,8 @@ sylius:
                 delete: "Delete"
                 edit: "Update"
             show:
-                title: ETL Execution
-                page_title: Show ETL
+                title: ETL Execution details
+                page_title: Show ETL Execution
                 details:
                     title: "Details"
                     name: "Name"
@@ -52,10 +52,11 @@ sylius:
                 queued: "Queued"
             new:
                 title: New ETL Execution
+                page_title: New ETL Execution
             input_data: Input data
             input_options: Input options
-        dashboard:
-            title: Dashboard
+        etl_dashboard:
+            title: ETL Overview
             subtitle: Overview of process executions
             total_etl: "Total number of executions"
             total_failure_execution: "Total failed executions"

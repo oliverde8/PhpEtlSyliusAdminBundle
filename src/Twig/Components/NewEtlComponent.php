@@ -6,6 +6,7 @@ namespace Oliverde8\PhpEtlSyliusAdminBundle\Twig\Components;
 
 use Oliverde8\PhpEtlBundle\Entity\EtlExecution;
 use Oliverde8\PhpEtlBundle\Services\ChainProcessorsManager;
+use Oliverde8\PhpEtlSyliusAdminBundle\Etl\ChainDefinitionFormatter;
 use Oliverde8\PhpEtlSyliusAdminBundle\Form\Type\Etl\EtlExecutionType;
 use Sylius\Bundle\UiBundle\Twig\Component\TemplatePropTrait;
 use Sylius\TwigHooks\LiveComponent\HookableLiveComponentTrait;
@@ -40,7 +41,7 @@ class NewEtlComponent extends AbstractController
     public function getRawDefinition(): string
     {
         if (isset($this->formValues['name'])) {
-            return $this->chainProcessorsManager->getRawDefinition($this->formValues['name']);
+            return ChainDefinitionFormatter::format($this->chainProcessorsManager->getRawDefinition($this->formValues['name']));
         }
 
         return '';

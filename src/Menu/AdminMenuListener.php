@@ -25,7 +25,7 @@ readonly class AdminMenuListener
 
         if ($executionsMenu = $menu->getChild('execution')) {
             $dashboardMenu = $this->menuFactory->createItem('etl_executions_dashboard', ['route' => 'oliverde8_admin_etl_execution_dashboard'])
-                ->setLabel($this->translator->trans('sylius.ui.dashboard.title'))
+                ->setLabel($this->translator->trans('sylius.ui.etl_dashboard.title'))
                 ->setLabelAttribute('icon', 'options');
 
             $gridMenu = $this->menuFactory->createItem('etl_executions_grid', ['route' => 'oliverde8_admin_etl_execution_index', 'extras' => ['routes' => [

@@ -7,7 +7,7 @@
 
 {% set header = 'app.ui.oliverde8_admin_etl_executions' %}
 
-{% block title %}{{ 'sylius.ui.dashboard.title'|trans }} {{ parent() }}{% endblock %}
+{% block title %}{{ 'sylius.ui.etl_dashboard.title'|trans }} {{ parent() }}{% endblock %}
 
 {% block body %}
     {% hook 'show' with { _prefixes: prefixes } %}
